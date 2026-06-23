@@ -6,7 +6,7 @@ const menuItems = [
   { label: '무료특강', href: '/free-lecture', emoji: '🌱' },
   { label: '소소숲 소개', href: '/about', emoji: '🌲' },
   { label: '카카오채널', href: 'http://pf.kakao.com/_gngTX', emoji: '💬', external: true },
-  { label: '인스타그램', href: 'https://instagram.com/sososup_forest', emoji: '📸', external: true },
+  { label: '인스타그램', href: 'https://instagram.com/slp_irudassam', emoji: '📸', external: true },
 ];
 
 export default function QuickMenu() {
