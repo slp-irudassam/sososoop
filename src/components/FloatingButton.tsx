@@ -3,7 +3,7 @@
 export default function FloatingButton() {
   return (
     <a
-      href="https://pf.kakao.com/_YOUR_CHANNEL"
+      href="http://pf.kakao.com/_gngTX"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#FEE500] flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-transform"

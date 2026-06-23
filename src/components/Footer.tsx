@@ -44,7 +44,7 @@ export default function Footer() {
               인스타그램 @sososup_forest
             </a>
             <a
-              href="https://pf.kakao.com/_YOUR_CHANNEL"
+              href="http://pf.kakao.com/_gngTX"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[12px] text-ink-muted hover:text-primary transition-colors"
@@ -55,9 +55,14 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-hairline flex flex-col md:flex-row justify-between gap-2">
-          <p className="text-[10px] text-ink-light">
-            © 2026 소소숲:지혜의 기록소. All rights reserved.
-          </p>
+          <div>
+            <p className="text-[10px] text-ink-light">
+              © 2026 소소숲:지혜의 기록소. All rights reserved.
+            </p>
+            <p className="text-[10px] text-ink-light mt-1">
+              사업자등록번호: 203-33-40593
+            </p>
+          </div>
           <div className="flex gap-4">
             <Link href="/privacy" className="text-[10px] text-ink-light hover:text-ink transition-colors">
               개인정보처리방침
