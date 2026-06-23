@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #7D8C5A;
+  --color-primary-dark: #6b7a4a;
+  --color-primary-light: #a8bc77;
+  --color-primary-on-dark: #b8cc88;
+  --color-ink: #1d1d1f;
+  --color-ink-muted: #5c5c5c;
+  --color-ink-light: #888888;
+  --color-canvas: #ffffff;
+  --color-parchment: #f5f0ea;
+  --color-pearl: #faf8f5;
+  --color-tile-dark: #1e2410;
+  --color-tile-dark-2: #252c18;
+  --color-nav-black: #111111;
+  --color-on-dark: #ffffff;
+  --color-hairline: #e0dcd8;
+  --color-warm-tan: #c4a882;
+
+  --font-family-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Pretendard', sans-serif;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #1d1d1f;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Pretendard', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
