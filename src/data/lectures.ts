@@ -24,8 +24,8 @@ export const lectures: Lecture[] = [
     category: "출판",
     notionFormUrl: "https://YOUR_NOTION_FORM_URL",
     accountInfo: {
-      bank: "카카오뱅크",
-      number: "3333-00-0000000",
+      bank: "토스뱅크",
+      number: "1000-1285-0842",
       holder: "이승윤",
     },
   },
@@ -39,8 +39,8 @@ export const lectures: Lecture[] = [
     category: "AI 활용",
     notionFormUrl: "https://YOUR_NOTION_FORM_URL",
     accountInfo: {
-      bank: "카카오뱅크",
-      number: "3333-00-0000000",
+      bank: "토스뱅크",
+      number: "1000-1285-0842",
       holder: "이승윤",
     },
   },
@@ -54,8 +54,8 @@ export const lectures: Lecture[] = [
     category: "보고서 작성",
     notionFormUrl: "https://YOUR_NOTION_FORM_URL",
     accountInfo: {
-      bank: "카카오뱅크",
-      number: "3333-00-0000000",
+      bank: "토스뱅크",
+      number: "1000-1285-0842",
       holder: "이승윤",
     },
   },
@@ -69,8 +69,8 @@ export const lectures: Lecture[] = [
     category: "콘텐츠 제작",
     notionFormUrl: "https://YOUR_NOTION_FORM_URL",
     accountInfo: {
-      bank: "카카오뱅크",
-      number: "3333-00-0000000",
+      bank: "토스뱅크",
+      number: "1000-1285-0842",
       holder: "이승윤",
     },
   },
