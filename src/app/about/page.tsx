@@ -34,7 +34,7 @@ export default function AboutPage() {
       <section className="bg-parchment py-20 px-6">
         <div className="max-w-[800px] mx-auto">
           <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-10">운영자 소개</h2>
-          <div className="flex flex-col md:flex-row gap-10 items-start">
+          <div className="flex flex-col md:flex-row gap-10 items-start mb-12">
             <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center flex-none text-4xl">
               🌲
             </div>
@@ -49,6 +49,81 @@ export default function AboutPage() {
               <p className="text-[17px] text-ink-muted leading-[1.47]">
                 AI 도구를 활용해 임상 업무를 효율화하고, 그 경험을 콘텐츠로 만들어 나누고 있습니다. 소소숲은 그 여정의 기록입니다.
               </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* 경력 */}
+            <div className="bg-canvas rounded-[18px] p-6 border border-hairline">
+              <p className="text-[13px] font-semibold text-primary mb-4 tracking-wide">경력</p>
+              <ul className="flex flex-col gap-2">
+                {[
+                  '정신건강의학과의원 언어재활사 (2003년 ~ 현재)',
+                  '캔바 크리에이터 / 미리캔버스 기여자',
+                  '선생님을 위한 캔바 AI 크리에이터 LAB 운영',
+                ].map((item) => (
+                  <li key={item} className="text-[14px] text-ink-muted leading-relaxed flex gap-2">
+                    <span className="text-primary mt-0.5 flex-none">·</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 자격 · 면허 */}
+            <div className="bg-canvas rounded-[18px] p-6 border border-hairline">
+              <p className="text-[13px] font-semibold text-primary mb-4 tracking-wide">자격 · 면허</p>
+              <ul className="flex flex-col gap-2">
+                {[
+                  '언어재활사 1급 (보건복지부)',
+                  '보육교사 1급 (보건복지부)',
+                  '미술심리상담사 1급 (한국임상미술심리상담학회)',
+                  '모래놀이심리상담사 1급 (한국교육심리협회)',
+                  '난독교육 전문가 3급 (국민대학교 난독교육연구소)',
+                  '캔바 디지털콘텐츠 강사 (국제디지털콘텐츠협회)',
+                  '생성형 AI 디지털콘텐츠 강사 (국제디지털콘텐츠협회)',
+                  'JSC 주니어 코치 (여성가족부소관 주니어사회단체)',
+                ].map((item) => (
+                  <li key={item} className="text-[14px] text-ink-muted leading-relaxed flex gap-2">
+                    <span className="text-primary mt-0.5 flex-none">·</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 학력 */}
+            <div className="bg-canvas rounded-[18px] p-6 border border-hairline">
+              <p className="text-[13px] font-semibold text-primary mb-4 tracking-wide">학력</p>
+              <ul className="flex flex-col gap-2">
+                {[
+                  '미술치료학 석사',
+                  '언어치료학 학사',
+                  '아동학 · 특수교육학 학사',
+                ].map((item) => (
+                  <li key={item} className="text-[14px] text-ink-muted leading-relaxed flex gap-2">
+                    <span className="text-primary mt-0.5 flex-none">·</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 전문 과정 */}
+            <div className="bg-canvas rounded-[18px] p-6 border border-hairline">
+              <p className="text-[13px] font-semibold text-primary mb-4 tracking-wide">전문 과정 수료</p>
+              <ul className="flex flex-col gap-2">
+                {[
+                  '난독증 및 읽기부진 중재 전문가 과정',
+                  '영어 난독 중재 전문가 과정 (English Phonics Specialist Course for SLPs)',
+                  '읽기·쓰기 장애 전문가 심화과정 (의사소통 및 학습장애 아동)',
+                ].map((item) => (
+                  <li key={item} className="text-[14px] text-ink-muted leading-relaxed flex gap-2">
+                    <span className="text-primary mt-0.5 flex-none">·</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

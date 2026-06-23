@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #F8F8F4; --tint: #EFF1E8; --primary: #4B5E2A; --dark-bg: #2B371A;
+  --text: #1A1A18; --sub: #5A5A54; --light: #FFFFFF;
+  --border: #DDE0D0; --font: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+}
+body { width: 1080px; height: 1350px; overflow: hidden; background: var(--dark-bg); }
+.card { width: 1080px; height: 1350px; padding: 96px 88px; display: flex; flex-direction: column; justify-content: flex-end; position: relative; }
+
+.noise {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.accent-line {
+  position: absolute; top: 0; left: 0; right: 0; height: 6px;
+  background: linear-gradient(90deg, #7FAF3A, #4B5E2A);
+}
+
+.tag {
+  display: inline-block;
+  padding: 10px 20px;
+  background: rgba(127, 175, 58, 0.2);
+  border: 1px solid rgba(127, 175, 58, 0.4);
+  border-radius: 999px;
+  font: 600 22px/1 var(--font);
+  letter-spacing: 1px;
+  color: #A8CF6F;
+  margin-bottom: 52px;
+}
+
+h1 {
+  font: 800 86px/1.1 var(--font);
+  color: var(--light);
+  letter-spacing: -1px;
+  margin-bottom: 36px;
+}
+
+h1 .accent { color: #A8CF6F; }
+
+.divider {
+  width: 56px; height: 3px;
+  background: #7FAF3A;
+  margin-bottom: 36px;
+}
+
+.sub {
+  font: 400 30px/1.7 var(--font);
+  color: rgba(255,255,255,0.6);
+  max-width: 760px;
+}
+
+.handle { position: absolute; bottom: 52px; left: 88px; font: 400 22px/1 var(--font); letter-spacing: 0.5px; color: rgba(255,255,255,0.35); }
+.page-num { position: absolute; bottom: 52px; right: 88px; font: 500 22px/1 var(--font); letter-spacing: 3px; color: rgba(255,255,255,0.2); }
+
+.deco-circle {
+  position: absolute; top: -120px; right: -80px;
+  width: 520px; height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(75,94,42,0.4) 0%, transparent 70%);
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="noise"></div>
+  <div class="accent-line"></div>
+  <div class="deco-circle"></div>
+
+  <span class="tag">스터디 후기</span>
+
+  <h1>P-FA Ⅱ 스터디,<br><span class="accent">잘 마쳤어요</span></h1>
+
+  <div class="divider"></div>
+
+  <p class="sub">
+    발화분석부터 AI 보고서까지.<br>함께 공부하고 나누었던 시간을 돌아봤어요.
+  </p>
+
+  <span class="handle">@slp_irudassam</span>
+  <span class="page-num">01 / 07</span>
+</div>
+</body>
+</html>

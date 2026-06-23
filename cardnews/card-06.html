@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #F8F8F4; --tint: #EFF1E8; --primary: #4B5E2A; --dark-bg: #2B371A;
+  --text: #1A1A18; --sub: #5A5A54; --light: #FFFFFF;
+  --border: #DDE0D0; --font: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+}
+body { width: 1080px; height: 1350px; overflow: hidden; background: var(--dark-bg); }
+.card { width: 1080px; height: 1350px; padding: 96px 88px; display: flex; flex-direction: column; justify-content: center; position: relative; }
+
+.accent-line { position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, #7FAF3A, #4B5E2A); }
+
+.deco-tl {
+  position: absolute; top: -80px; left: -80px;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(75,94,42,0.35) 0%, transparent 70%);
+}
+
+.next-badge {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #7FAF3A;
+  border-radius: 999px;
+  font: 700 22px/1 var(--font);
+  letter-spacing: 1px;
+  color: var(--dark-bg);
+  margin-bottom: 40px;
+}
+
+h2 {
+  font: 800 78px/1.1 var(--font);
+  color: var(--light);
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+}
+
+h2 .accent { color: #A8CF6F; }
+
+.subtitle {
+  font: 400 30px/1.6 var(--font);
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 64px;
+}
+
+.info-box {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 52px;
+  margin-bottom: 40px;
+}
+
+.info-row {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.info-row:last-child { margin-bottom: 0; }
+
+.info-label {
+  font: 600 22px/1 var(--font);
+  color: #A8CF6F;
+  min-width: 60px;
+  letter-spacing: 0.5px;
+}
+.info-value {
+  font: 500 30px/1.4 var(--font);
+  color: var(--light);
+}
+
+.cta-text {
+  font: 400 27px/1.7 var(--font);
+  color: rgba(255,255,255,0.5);
+}
+.cta-text strong { color: #A8CF6F; }
+
+.handle { position: absolute; bottom: 52px; left: 88px; font: 400 22px/1 var(--font); color: rgba(255,255,255,0.25); }
+.page-num { position: absolute; bottom: 52px; right: 88px; font: 500 22px/1 var(--font); letter-spacing: 3px; color: rgba(255,255,255,0.18); }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="accent-line"></div>
+  <div class="deco-tl"></div>
+
+  <span class="next-badge">NEXT STUDY</span>
+
+  <h2>7월엔<br><span class="accent">KOLRA</span> 스터디</h2>
+
+  <p class="subtitle">한국어 읽기검사, 같이 파봐요 📖</p>
+
+  <div class="info-box">
+    <div class="info-row">
+      <span class="info-label">언제</span>
+      <span class="info-value">2026년 7월 6일, 20일</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">주제</span>
+      <span class="info-value">KOLRA 평가도구 완전 정복</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">대상</span>
+      <span class="info-value">언어재활사 / 1·2급 준비생</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">신청</span>
+      <span class="info-value">DM으로 문의</span>
+    </div>
+  </div>
+
+  <p class="cta-text">
+    관심 있으신 선생님은<br>
+    <strong>DM</strong> 주세요.
+  </p>
+
+  <span class="handle">@slp_irudassam</span>
+  <span class="page-num">06 / 07</span>
+</div>
+</body>
+</html>
