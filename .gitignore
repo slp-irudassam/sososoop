@@ -2,6 +2,10 @@
 
 # dependencies
 /node_modules
+**/node_modules
+
+# cardnews (별도 프로젝트 폴더)
+/cardnews
 /.pnp
 .pnp.*
 .yarn/*
