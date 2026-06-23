@@ -58,7 +58,10 @@ export default function AboutPage() {
               <p className="text-[13px] font-semibold text-primary mb-4 tracking-wide">경력</p>
               <ul className="flex flex-col gap-2">
                 {[
-                  '정신건강의학과의원 언어재활사 (2003년 ~ 현재)',
+                  '現) 라온 정신건강의학과 언어치료사',
+                  '前) 송정중 신경정신과 언어치료사',
+                  '前) 햇살소아정신과 언어치료사',
+                  '前) 참빛아동발달센터 언어치료사',
                   '캔바 크리에이터 / 미리캔버스 기여자',
                   '선생님을 위한 캔바 AI 크리에이터 LAB 운영',
                 ].map((item) => (
@@ -80,9 +83,9 @@ export default function AboutPage() {
                   '미술심리상담사 1급 (한국임상미술심리상담학회)',
                   '모래놀이심리상담사 1급 (한국교육심리협회)',
                   '난독교육 전문가 3급 (국민대학교 난독교육연구소)',
+                  'JSC 주니어 코치 (여성가족부소관 주니어사회단체)',
                   '캔바 디지털콘텐츠 강사 (국제디지털콘텐츠협회)',
                   '생성형 AI 디지털콘텐츠 강사 (국제디지털콘텐츠협회)',
-                  'JSC 주니어 코치 (여성가족부소관 주니어사회단체)',
                 ].map((item) => (
                   <li key={item} className="text-[14px] text-ink-muted leading-relaxed flex gap-2">
                     <span className="text-primary mt-0.5 flex-none">·</span>
