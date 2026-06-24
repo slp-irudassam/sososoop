@@ -23,7 +23,7 @@ export const freeResources: Resource[] = [
     description:
       "보고서, 치료계획, 부모상담에 바로 쓸 수 있는 프롬프트 50개",
     category: "AI 활용",
-    fileUrl: "/files/ai-prompt-guide.pdf",
+    fileUrl: "/files/언어치료·특수교육 AI 활용 프롬프트 50_무료공유_이루다쌤.pdf",
     downloadName: "언어치료·특수교육 AI 활용 프롬프트 50_무료공유_이루다쌤.pdf",
     fileType: "PDF",
     type: "free",
