@@ -71,6 +71,22 @@ export const freeResources: Resource[] = [
 ];
 
 export const paidResources: Resource[] = [
+  {
+    id: "ai-prompt-100-pack",
+    title: "AI 활용 프롬프트 100 + 자료 패키지",
+    description:
+      "3종 묶음: ① 언어치료·특수교육 AI 활용 프롬프트 100선 ② 치료 자료 소스 사이트 모음 ③ 캔바 요소 키워드 모음. 무료판(프롬프트 50)의 확장 버전과 실전 자료 제작 리소스를 한 번에.",
+    category: "콘텐츠 제작",
+    fileType: "PDF 3종",
+    type: "paid",
+    price: 9900,
+    notionFormUrl: "https://YOUR_NOTION_FORM_URL",
+    accountInfo: {
+      bank: "토스뱅크",
+      number: "1000-1285-0842",
+      holder: "이승윤",
+    },
+  },
   // 유료 자료를 추가할 때 여기에 작성하세요. 예시:
   // {
   //   id: "example-paid",
