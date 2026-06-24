@@ -7,6 +7,7 @@ export type Resource = {
   type: 'free' | 'paid';
   fileUrl?: string;
   downloadName?: string;
+  linkUrl?: string;
   price?: number;
   notionFormUrl?: string;
   accountInfo?: {
@@ -29,13 +30,14 @@ export const freeResources: Resource[] = [
     type: "free",
   },
   {
-    id: "kolra-reference",
-    title: "KOLRA 검사 참고 자료",
+    id: "reading-ssokssok-gpt",
+    title: "소소숲 vol2. 이루다쌤의 읽기학습지 생성봇 읽기쏙쏙",
     description:
-      "한국어 읽기 검사(KOLRA) 해석 및 보고서 작성 참고 자료",
-    category: "평가",
-    fileUrl: "/files/kolra-reference.pdf",
-    fileType: "PDF",
+      "학년과 주제 키워드만 입력하면, 해당 수준에 맞는 읽기 지문과 문제, 어휘 정리, 그리고 어울리는 이미지를 생성할 수 있는 프롬프트까지 자동으로 생성해주는 선생님을 위한 학습 자료 제작 GPT입니다.",
+    category: "AI 활용",
+    linkUrl:
+      "https://chatgpt.com/g/g-69573a7815a48191adc238d9d52711d0-sososup-vol2-irudassaemyi-ilggihagseubji-saengseongbos-ilggissogssog",
+    fileType: "GPT",
     type: "free",
   },
   {
