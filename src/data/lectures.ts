@@ -22,7 +22,7 @@ export const lectures: Lecture[] = [
     price: 200000,
     duration: "5시간",
     category: "출판",
-    notionFormUrl: "https://YOUR_NOTION_FORM_URL",
+    notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
     accountInfo: {
       bank: "토스뱅크",
       number: "1000-1285-0842",
@@ -37,7 +37,7 @@ export const lectures: Lecture[] = [
     price: 49000,
     duration: "3시간",
     category: "AI 활용",
-    notionFormUrl: "https://YOUR_NOTION_FORM_URL",
+    notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
     accountInfo: {
       bank: "토스뱅크",
       number: "1000-1285-0842",
@@ -52,7 +52,7 @@ export const lectures: Lecture[] = [
     price: 39000,
     duration: "2시간",
     category: "보고서 작성",
-    notionFormUrl: "https://YOUR_NOTION_FORM_URL",
+    notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
     accountInfo: {
       bank: "토스뱅크",
       number: "1000-1285-0842",
@@ -67,7 +67,7 @@ export const lectures: Lecture[] = [
     price: 59000,
     duration: "4시간",
     category: "콘텐츠 제작",
-    notionFormUrl: "https://YOUR_NOTION_FORM_URL",
+    notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
     accountInfo: {
       bank: "토스뱅크",
       number: "1000-1285-0842",

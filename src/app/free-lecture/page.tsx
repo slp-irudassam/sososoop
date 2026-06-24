@@ -31,7 +31,7 @@ export default function FreeLecturePage() {
                   아래 버튼을 눌러 노션 신청서를 작성해주세요.
                 </p>
                 <a
-                  href="https://YOUR_NOTION_FORM_URL"
+                  href="https://sunrise-wisteria-5ca.notion.site/f693a65dd06543e1b98fbac559dfc758"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-6 py-3 rounded-full bg-primary text-white text-[17px] hover:bg-primary-dark transition-colors active:scale-95"

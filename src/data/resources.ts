@@ -80,7 +80,7 @@ export const paidResources: Resource[] = [
     fileType: "PDF 3종",
     type: "paid",
     price: 9900,
-    notionFormUrl: "https://YOUR_NOTION_FORM_URL",
+    notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
     accountInfo: {
       bank: "토스뱅크",
       number: "1000-1285-0842",
