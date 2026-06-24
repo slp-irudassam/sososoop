@@ -37,7 +37,7 @@ function FreeResourceCard({ resource }: { resource: Resource }) {
       </p>
       <a
         href={resource.fileUrl}
-        download
+        download={resource.downloadName ?? ''}
         className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-primary text-white text-[14px] font-medium hover:bg-primary-dark transition-colors active:scale-95 self-start"
       >
         <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
