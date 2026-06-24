@@ -89,6 +89,22 @@ export const paidResources: Resource[] = [
       holder: "이승윤",
     },
   },
+  {
+    id: "pfa-report-gpt",
+    title: "P-FA 평가보고서 초안 생성기",
+    description:
+      "파라다이스-유창성검사II(P-FAII) 평가보고서 초안 작성을 돕는 전문 보조 도구입니다. 평가 결과 엑셀파일과 발화 전사문, 아동 배경정보 파일을 첨부하고 '첨부 내용으로 평가보고서 작성해줘'라고 하시면 보고서 초안을 만들어 줍니다.",
+    category: "AI 활용",
+    fileType: "GPT",
+    type: "paid",
+    price: 5000,
+    notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
+    accountInfo: {
+      bank: "토스뱅크",
+      number: "1000-1285-0842",
+      holder: "이승윤",
+    },
+  },
   // 유료 자료를 추가할 때 여기에 작성하세요. 예시:
   // {
   //   id: "example-paid",
