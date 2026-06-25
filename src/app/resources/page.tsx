@@ -2,7 +2,7 @@ import { freeResources, paidResources } from '@/data/resources';
 import { getResources } from '@/lib/notion';
 import ResourceTabs from '@/components/ResourceTabs';
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export default async function ResourcesPage() {
   const notionResources = await getResources();
