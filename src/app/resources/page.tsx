@@ -1,7 +1,20 @@
 import { freeResources, paidResources } from '@/data/resources';
+import { getResources } from '@/lib/notion';
 import ResourceTabs from '@/components/ResourceTabs';
 
-export default function ResourcesPage() {
+export const revalidate = 3600;
+
+export default async function ResourcesPage() {
+  const notionResources = await getResources();
+
+  const free = notionResources
+    ? notionResources.filter((r) => r.type === 'free')
+    : freeResources;
+
+  const paid = notionResources
+    ? notionResources.filter((r) => r.type === 'paid')
+    : paidResources;
+
   return (
     <>
       <section className="bg-parchment py-16 px-6">
@@ -18,7 +31,7 @@ export default function ResourcesPage() {
 
       <section className="bg-canvas py-12 px-6">
         <div className="max-w-[1000px] mx-auto">
-          <ResourceTabs freeResources={freeResources} paidResources={paidResources} />
+          <ResourceTabs freeResources={free} paidResources={paid} />
         </div>
       </section>
     </>

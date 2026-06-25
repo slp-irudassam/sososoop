@@ -43,3 +43,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 루트 PDF 파일 및 작업파일
+*.pdf
+*.code-workspace
