@@ -2,10 +2,19 @@ import HeroSlider from '@/components/HeroSlider';
 import SectionCarousel from '@/components/SectionCarousel';
 import MarqueeBanner from '@/components/MarqueeBanner';
 import { lectures } from '@/data/lectures';
-import { resources } from '@/data/resources';
+import { freeResources, paidResources } from '@/data/resources';
+import { getResources } from '@/lib/notion';
 import Link from 'next/link';
 
-export default function HomePage() {
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const notionResources = await getResources();
+
+  const free = notionResources ? notionResources.filter((r) => r.type === 'free') : freeResources;
+  const paid = notionResources ? notionResources.filter((r) => r.type === 'paid') : paidResources;
+  const allResources = [...free, ...paid];
+
   const lectureCards = lectures.map((l) => ({
     id: l.id,
     title: l.title,
@@ -15,11 +24,11 @@ export default function HomePage() {
     badge: l.category,
   }));
 
-  const resourceCards = resources.map((r) => ({
+  const resourceCards = allResources.map((r) => ({
     id: r.id,
     title: r.title,
     description: r.description,
-    meta: `무료 · ${r.fileType}`,
+    meta: r.type === 'paid' ? `${r.price?.toLocaleString()}원 · ${r.fileType}` : `무료 · ${r.fileType}`,
     href: `/resources#${r.id}`,
     badge: r.category,
   }));
