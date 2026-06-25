@@ -1,7 +1,13 @@
 import Link from 'next/link';
-import { lectures } from '@/data/lectures';
+import { lectures as staticLectures } from '@/data/lectures';
+import { getLectures } from '@/lib/notion';
 
-export default function LecturesPage() {
+export const revalidate = 60;
+
+export default async function LecturesPage() {
+  const notionLectures = await getLectures();
+  const lectures = notionLectures ?? staticLectures;
+
   return (
     <>
       <section className="bg-tile-dark py-16 px-6">

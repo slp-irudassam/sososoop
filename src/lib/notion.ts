@@ -1,6 +1,7 @@
 import { Client } from '@notionhq/client';
 import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints/common';
 import type { Resource } from '@/data/resources';
+import type { Lecture } from '@/data/lectures';
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
@@ -63,6 +64,40 @@ export async function getResources(): Promise<Resource[] | null> {
         };
 
         return resource;
+      });
+  } catch {
+    return null;
+  }
+}
+
+export async function getLectures(): Promise<Lecture[] | null> {
+  const dsId = process.env.NOTION_LECTURES_DS_ID;
+  if (!dsId || !process.env.NOTION_TOKEN) return null;
+
+  try {
+    const response = await notion.dataSources.query({
+      data_source_id: dsId,
+      sorts: [{ property: '정렬순서', direction: 'ascending' }],
+    });
+
+    return response.results
+      .filter((item): item is PageObjectResponse => item.object === 'page' && 'properties' in item)
+      .map((page) => {
+        const props = page.properties as Record<string, unknown>;
+        const bank = text(props, '계좌은행');
+        const number = text(props, '계좌번호');
+        const holder = text(props, '예금주');
+
+        return {
+          id: text(props, '슬러그') || page.id,
+          title: text(props, '제목'),
+          description: text(props, '설명'),
+          price: num(props, '가격') ?? 0,
+          duration: text(props, '수강시간'),
+          category: select(props, '카테고리') ?? '',
+          notionFormUrl: url(props, '신청폼URL') ?? '',
+          accountInfo: { bank, number, holder },
+        };
       });
   } catch {
     return null;

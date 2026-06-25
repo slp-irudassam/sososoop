@@ -1,9 +1,12 @@
-import { lectures } from '@/data/lectures';
+import { lectures as staticLectures } from '@/data/lectures';
+import { getLectures } from '@/lib/notion';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 
+export const revalidate = 60;
+
 export async function generateStaticParams() {
-  return lectures.map((l) => ({ id: l.id }));
+  return staticLectures.map((l) => ({ id: l.id }));
 }
 
 export default async function LectureDetailPage({
@@ -12,6 +15,9 @@ export default async function LectureDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+
+  const notionLectures = await getLectures();
+  const lectures = notionLectures ?? staticLectures;
   const lecture = lectures.find((l) => l.id === id);
 
   if (!lecture) notFound();
