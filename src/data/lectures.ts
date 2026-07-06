@@ -55,7 +55,7 @@ export const lectures: Lecture[] = [
     price: 39000,
     duration: "2시간",
     category: "보고서 작성",
-    image: "/images/lecture-report-writing.png",
+    image: "/images/lecture-report-writing2.png",
     notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
     accountInfo: {
       bank: "토스뱅크",
