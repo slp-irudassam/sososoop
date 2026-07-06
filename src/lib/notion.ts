@@ -9,8 +9,18 @@ const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
 const staticResources = [...freeResources, ...paidResources];
 
+const resourceKeywordImageMap: Array<{ keyword: string; image: string }> = [
+  { keyword: '유창성장애', image: '/images/resource-fluency-exam-analysis.png' },
+  { keyword: '색칠공부 공방', image: '/images/resource-coloring-book-gpt.png' },
+  { keyword: '색연필 그림봇', image: '/images/resource-cute-pencil-character-gpt.png' },
+];
+
 function findStaticImage(title: string, staticItems: { title: string; image?: string }[]): string | undefined {
   return staticItems.find((s) => s.title === title)?.image;
+}
+
+function findKeywordImage(title: string): string | undefined {
+  return resourceKeywordImageMap.find(({ keyword }) => title.includes(keyword))?.image;
 }
 
 function text(props: Record<string, unknown>, key: string): string {
@@ -68,7 +78,7 @@ export async function getResources(): Promise<Resource[] | null> {
           downloadName: text(props, '다운로드파일명') || undefined,
           linkUrl: url(props, '링크URL'),
           price: num(props, '가격'),
-          image: url(props, '이미지URL') ?? findStaticImage(title, staticResources),
+          image: url(props, '이미지URL') ?? findStaticImage(title, staticResources) ?? findKeywordImage(title),
           notionFormUrl: url(props, '신청폼URL'),
           accountInfo: bank && number && holder ? { bank, number, holder } : undefined,
         };
