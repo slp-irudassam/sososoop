@@ -1,6 +1,6 @@
 import HeroSlider from '@/components/HeroSlider';
 import SectionCarousel from '@/components/SectionCarousel';
-import MarqueeBanner from '@/components/MarqueeBanner';
+
 import { lectures } from '@/data/lectures';
 import { freeResources, paidResources } from '@/data/resources';
 import { getResources } from '@/lib/notion';
@@ -45,8 +45,6 @@ export default async function HomePage() {
         cards={resourceCards}
         dark={false}
       />
-
-      <MarqueeBanner />
 
       <SectionCarousel
         title="강의 목록"
