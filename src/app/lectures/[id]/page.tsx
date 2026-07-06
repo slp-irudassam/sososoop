@@ -25,8 +25,19 @@ export default async function LectureDetailPage({
   return (
     <>
       {/* 강의 헤더 */}
-      <section className="bg-tile-dark py-16 px-6">
-        <div className="max-w-[800px] mx-auto">
+      <section className={`relative overflow-hidden py-16 px-6 ${lecture.image ? '' : 'bg-tile-dark'}`}>
+        {lecture.image && (
+          <>
+            <img
+              src={lecture.image}
+              alt=""
+              aria-hidden
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/60" />
+          </>
+        )}
+        <div className="relative z-10 max-w-[800px] mx-auto">
           <Link
             href="/lectures"
             className="inline-flex items-center gap-1 text-[14px] text-on-dark/50 hover:text-on-dark/80 transition-colors mb-6"
