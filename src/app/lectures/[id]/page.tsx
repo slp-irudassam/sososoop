@@ -32,7 +32,7 @@ export default async function LectureDetailPage({
               src={lecture.image}
               alt=""
               aria-hidden
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover object-top"
             />
             <div className="absolute inset-0 bg-black/60" />
           </>
