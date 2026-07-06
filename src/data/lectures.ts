@@ -6,6 +6,7 @@ export type Lecture = {
   duration: string;
   category: string;
   notionFormUrl: string;
+  image?: string;
   accountInfo: {
     bank: string;
     number: string;
@@ -22,6 +23,7 @@ export const lectures: Lecture[] = [
     price: 200000,
     duration: "5시간",
     category: "출판",
+    image: "/images/lecture-book-publishing.png",
     notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
     accountInfo: {
       bank: "토스뱅크",
@@ -37,6 +39,7 @@ export const lectures: Lecture[] = [
     price: 49000,
     duration: "3시간",
     category: "AI 활용",
+    image: "/images/lecture-ai-basics.png",
     notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
     accountInfo: {
       bank: "토스뱅크",
@@ -52,6 +55,7 @@ export const lectures: Lecture[] = [
     price: 39000,
     duration: "2시간",
     category: "보고서 작성",
+    image: "/images/lecture-report-writing.png",
     notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
     accountInfo: {
       bank: "토스뱅크",
@@ -67,6 +71,7 @@ export const lectures: Lecture[] = [
     price: 59000,
     duration: "4시간",
     category: "콘텐츠 제작",
+    image: "/images/lecture-content-creation.png",
     notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
     accountInfo: {
       bank: "토스뱅크",

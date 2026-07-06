@@ -22,6 +22,7 @@ export default async function HomePage() {
     meta: `${l.price.toLocaleString()}원 · ${l.duration}`,
     href: `/lectures/${l.id}`,
     badge: l.category,
+    image: l.image,
   }));
 
   const resourceCards = allResources.map((r) => ({
@@ -31,6 +32,7 @@ export default async function HomePage() {
     meta: r.type === 'paid' ? `${r.price?.toLocaleString()}원 · ${r.fileType}` : `무료 · ${r.fileType}`,
     href: `/resources#${r.id}`,
     badge: r.category,
+    image: r.image,
   }));
 
   return (

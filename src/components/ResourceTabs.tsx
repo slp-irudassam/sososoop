@@ -11,12 +11,30 @@ const categoryColors: Record<string, string> = {
   '임상': 'bg-rose-50 text-rose-700',
 };
 
+function ResourceThumbnail({ image, title }: { image?: string; title: string }) {
+  return (
+    <div className="w-full h-44 overflow-hidden bg-stone-100 flex items-center justify-center">
+      {image ? (
+        <img src={image} alt={title} className="w-full h-full object-cover" />
+      ) : (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" className="text-stone-300" stroke="currentColor" strokeWidth="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <circle cx="8.5" cy="8.5" r="1.5" />
+          <path d="M21 15l-5-5L5 21" />
+        </svg>
+      )}
+    </div>
+  );
+}
+
 function FreeResourceCard({ resource }: { resource: Resource }) {
   return (
     <article
       id={resource.id}
-      className="bg-pearl rounded-[18px] p-6 border border-hairline flex flex-col"
+      className="bg-pearl rounded-[18px] overflow-hidden border border-hairline flex flex-col"
     >
+      <ResourceThumbnail image={resource.image} title={resource.title} />
+      <div className="p-6 flex flex-col flex-1">
       <div className="flex items-start justify-between mb-4">
         <span
           className={`text-[12px] font-semibold px-3 py-1 rounded-full ${
@@ -60,6 +78,7 @@ function FreeResourceCard({ resource }: { resource: Resource }) {
           무료 다운로드
         </a>
       )}
+      </div>
     </article>
   );
 }
@@ -68,8 +87,10 @@ function PaidResourceCard({ resource }: { resource: Resource }) {
   return (
     <article
       id={resource.id}
-      className="bg-pearl rounded-[18px] p-6 border border-hairline flex flex-col"
+      className="bg-pearl rounded-[18px] overflow-hidden border border-hairline flex flex-col"
     >
+      <ResourceThumbnail image={resource.image} title={resource.title} />
+      <div className="p-6 flex flex-col flex-1">
       <div className="flex items-start justify-between mb-4">
         <span
           className={`text-[12px] font-semibold px-3 py-1 rounded-full ${
@@ -99,6 +120,7 @@ function PaidResourceCard({ resource }: { resource: Resource }) {
       >
         구매 신청하기
       </a>
+      </div>
     </article>
   );
 }

@@ -27,27 +27,41 @@ export default async function LecturesPage() {
               <Link
                 key={lecture.id}
                 href={`/lectures/${lecture.id}`}
-                className="block bg-pearl rounded-[18px] p-6 border border-hairline hover:border-warm-tan/60 hover:shadow-sm transition-all group"
+                className="block bg-pearl rounded-[18px] overflow-hidden border border-hairline hover:border-warm-tan/60 hover:shadow-sm transition-all group"
               >
-                <span className="inline-block text-[12px] font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full mb-4">
-                  {lecture.category}
-                </span>
-                <h2 className="text-[19px] font-semibold text-ink mb-3 leading-snug group-hover:text-primary transition-colors">
-                  {lecture.title}
-                </h2>
-                <p className="text-[14px] text-ink-muted leading-relaxed mb-5 line-clamp-3">
-                  {lecture.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-[19px] font-semibold text-ink">
-                      {lecture.price.toLocaleString()}원
-                    </p>
-                    <p className="text-[13px] text-ink-light">{lecture.duration}</p>
-                  </div>
-                  <span className="text-[14px] text-primary font-medium group-hover:underline">
-                    자세히 보기 →
+                {/* 썸네일 */}
+                <div className="w-full h-48 overflow-hidden bg-stone-100 flex items-center justify-center">
+                  {lecture.image ? (
+                    <img src={lecture.image} alt={lecture.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  ) : (
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" className="text-stone-300" stroke="currentColor" strokeWidth="1.5">
+                      <rect x="3" y="3" width="18" height="18" rx="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" />
+                      <path d="M21 15l-5-5L5 21" />
+                    </svg>
+                  )}
+                </div>
+                <div className="p-6">
+                  <span className="inline-block text-[12px] font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full mb-4">
+                    {lecture.category}
                   </span>
+                  <h2 className="text-[19px] font-semibold text-ink mb-3 leading-snug group-hover:text-primary transition-colors">
+                    {lecture.title}
+                  </h2>
+                  <p className="text-[14px] text-ink-muted leading-relaxed mb-5 line-clamp-3">
+                    {lecture.description}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-[19px] font-semibold text-ink">
+                        {lecture.price.toLocaleString()}원
+                      </p>
+                      <p className="text-[13px] text-ink-light">{lecture.duration}</p>
+                    </div>
+                    <span className="text-[14px] text-primary font-medium group-hover:underline">
+                      자세히 보기 →
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}

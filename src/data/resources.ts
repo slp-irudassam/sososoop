@@ -9,6 +9,7 @@ export type Resource = {
   downloadName?: string;
   linkUrl?: string;
   price?: number;
+  image?: string;
   notionFormUrl?: string;
   accountInfo?: {
     bank: string;
@@ -28,6 +29,7 @@ export const freeResources: Resource[] = [
     downloadName: "언어치료·특수교육 AI 활용 프롬프트 50_무료공유_이루다쌤.pdf",
     fileType: "PDF",
     type: "free",
+    image: "/images/resource-ai-prompt-guide.png",
   },
   {
     id: "reading-ssokssok-gpt",
@@ -39,6 +41,7 @@ export const freeResources: Resource[] = [
       "https://chatgpt.com/g/g-69573a7815a48191adc238d9d52711d0-sososup-vol2-irudassaemyi-ilggihagseubji-saengseongbos-ilggissogssog",
     fileType: "GPT",
     type: "free",
+    image: "/images/resource-reading-gpt.png",
   },
   {
     id: "daily-record-template",
@@ -49,6 +52,7 @@ export const freeResources: Resource[] = [
     fileUrl: "/files/daily-record.pdf",
     fileType: "PDF",
     type: "free",
+    image: "/images/resource-daily-record.png",
   },
   {
     id: "study-planner",
@@ -59,6 +63,7 @@ export const freeResources: Resource[] = [
     fileUrl: "/files/study-planner.pdf",
     fileType: "PDF",
     type: "free",
+    image: "/images/resource-study-planner.png",
   },
   {
     id: "parent-consult-script",
@@ -69,6 +74,7 @@ export const freeResources: Resource[] = [
     fileUrl: "/files/parent-consult.pdf",
     fileType: "PDF",
     type: "free",
+    image: "/images/resource-parent-consult.png",
   },
 ];
 
@@ -82,6 +88,7 @@ export const paidResources: Resource[] = [
     fileType: "PDF 3종",
     type: "paid",
     price: 9900,
+    image: "/images/resource-ai-prompt-100.png",
     notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
     accountInfo: {
       bank: "토스뱅크",
@@ -98,6 +105,7 @@ export const paidResources: Resource[] = [
     fileType: "GPT",
     type: "paid",
     price: 5000,
+    image: "/images/resource-pfa-gpt.png",
     notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
     accountInfo: {
       bank: "토스뱅크",
