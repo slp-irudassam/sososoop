@@ -13,6 +13,7 @@ const resourceKeywordImageMap: Array<{ keyword: string; image: string }> = [
   { keyword: '유창성장애', image: '/images/resource-fluency-exam-analysis.png' },
   { keyword: '색칠공부 공방', image: '/images/resource-coloring-book-gpt.png' },
   { keyword: '색연필 그림봇', image: '/images/resource-cute-pencil-character-gpt.png' },
+  { keyword: '읽기쏙쏙', image: '/images/resource-reading-gpt.png' },
 ];
 
 function findStaticImage(title: string, staticItems: { title: string; image?: string }[]): string | undefined {
