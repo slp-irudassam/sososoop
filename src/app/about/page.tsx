@@ -60,8 +60,10 @@ export default function AboutPage() {
       </section>
 
       {/* 운영자 소개 */}
-      <section className="bg-parchment py-20 px-6">
-        <div className="max-w-[800px] mx-auto">
+      <section className="relative overflow-hidden bg-parchment py-20 px-6">
+        <img src="/images/about-hero2.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-white/75" />
+        <div className="relative z-10 max-w-[800px] mx-auto">
           <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-10">운영자 소개</h2>
 
           {/* 프로필 카드 */}
