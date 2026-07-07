@@ -1,6 +1,13 @@
+import type { Metadata } from 'next';
 import { freeResources, paidResources } from '@/data/resources';
 import { getResources } from '@/lib/notion';
 import ResourceTabs from '@/components/ResourceTabs';
+
+export const metadata: Metadata = {
+  title: '자료실',
+  description:
+    '임상 현장에서 바로 쓸 수 있는 무료·유료 자료를 제공합니다. AI 프롬프트 모음, 학습 자료 제작 GPT 등.',
+};
 
 export const revalidate = 60;
 

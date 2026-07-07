@@ -1,6 +1,13 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
+
+export const metadata: Metadata = {
+  title: '소소숲 소개',
+  description:
+    '작은 것이 자라서 특별한 것이 됩니다. 언어재활사와 교육 전문가를 위한 배움·기록·나눔 공간, 소소숲을 소개합니다.',
+};
 
 export default function AboutPage() {
   return (

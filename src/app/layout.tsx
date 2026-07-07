@@ -5,7 +5,10 @@ import Footer from '@/components/Footer';
 import FloatingButton from '@/components/FloatingButton';
 
 export const metadata: Metadata = {
-  title: '소소숲:지혜의 기록소',
+  title: {
+    default: '소소숲:지혜의 기록소',
+    template: '%s | 소소숲',
+  },
   description:
     '언어재활사와 교육 전문가들이 배움과 기록을 통해 함께 성장하는 따뜻한 지식 공동체',
   keywords: ['언어재활사', 'AI 활용', '교육 콘텐츠', '소소숲'],

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { lectures as staticLectures } from '@/data/lectures';
 import { lectureDetails } from '@/data/lectureDetails';
 import { getLectures } from '@/lib/notion';
@@ -8,6 +9,24 @@ export const revalidate = 60;
 
 export async function generateStaticParams() {
   return staticLectures.map((l) => ({ id: l.id }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const lecture =
+    staticLectures.find((l) => l.id === id) ??
+    (await getLectures())?.find((l) => l.id === id);
+
+  if (!lecture) return {};
+
+  return {
+    title: lecture.title,
+    description: lecture.description,
+  };
 }
 
 export default async function LectureDetailPage({

@@ -1,6 +1,13 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { lectures as staticLectures } from '@/data/lectures';
 import { getLectures } from '@/lib/notion';
+
+export const metadata: Metadata = {
+  title: '강의 목록',
+  description:
+    '언어재활사와 교육 전문가를 위한 실전 강의 — AI 활용, 평가보고서 작성, 책 출판, 콘텐츠 제작.',
+};
 
 export const revalidate = 60;
 

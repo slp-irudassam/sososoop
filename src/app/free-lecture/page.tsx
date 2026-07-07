@@ -1,3 +1,11 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '무료특강 신청',
+  description:
+    '정규 강의 오픈에 앞서 진행하는 소소숲 무료특강. 신청하고 소소숲 콘텐츠를 먼저 경험해보세요.',
+};
+
 export default function FreeLecturePage() {
   return (
     <>
