@@ -1,13 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const values = [
-  { title: '성장', desc: '완벽함보다 꾸준함. 어제보다 조금 더 나아지는 것', emoji: '🌱' },
-  { title: '기록', desc: '배움은 기록될 때 자산이 된다', emoji: '📝' },
-  { title: '나눔', desc: '배움은 나눌수록 커진다', emoji: '🤝' },
-  { title: '실천', desc: '아는 것보다 해보는 것이 중요하다', emoji: '✨' },
-  { title: '따뜻함', desc: '경쟁보다 응원. 비교보다 성장', emoji: '🌿' },
-];
 
 export default function AboutPage() {
   return (
@@ -140,33 +133,34 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 미션 */}
-      <section className="relative overflow-hidden bg-canvas py-20 px-6">
+      {/* 비전 */}
+      <section className="relative overflow-hidden bg-canvas py-24 px-6">
         <img src="/images/about-mission.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-white/70" />
+        <div className="absolute inset-0 bg-white/80" />
         <div className="relative z-10 max-w-[800px] mx-auto">
-          <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-6">미션</h2>
-          <blockquote className="border-l-4 border-primary pl-6 mb-8">
-            <p className="text-[21px] text-ink leading-relaxed italic">
-              "혼자 공부하면 쉽게 지치지만, 함께 기록하고 나누면 더 오래, 더 멀리 갈 수 있다."
-            </p>
-          </blockquote>
-          <p className="text-[17px] text-ink-muted leading-[1.47]">
-            배움, 기록, 나눔을 통해 함께 성장하는 공간을 만듭니다. 언어재활사와 교육 전문가들이 AI를 활용하여 더 효율적으로 일하고 성장하도록 돕는 것이 소소숲의 미션입니다.
-          </p>
-        </div>
-      </section>
+          <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-8">비전</h2>
 
-      {/* 핵심 가치 */}
-      <section className="bg-parchment py-20 px-6">
-        <div className="max-w-[1000px] mx-auto">
-          <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-10">핵심 가치</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {values.map((v) => (
-              <div key={v.title} className="bg-canvas rounded-[18px] p-6 border border-hairline">
-                <span className="text-3xl mb-4 block">{v.emoji}</span>
-                <h3 className="text-[17px] font-semibold text-ink mb-2">{v.title}</h3>
-                <p className="text-[14px] text-ink-muted leading-relaxed">{v.desc}</p>
+          <p className="text-[20px] font-medium text-ink leading-[1.6] mb-6">
+            배움이 기록이 되고,<br />
+            기록이 나눔이 되며,<br />
+            나눔이 다시 누군가의 성장으로 이어지는 공간을 만듭니다.
+          </p>
+          <p className="text-[16px] text-ink-muted leading-[1.8] mb-4">
+            소소숲은 언어재활사와 교육 전문가들이 각자의 현장에서 쌓아온 경험을 따뜻하게 기록하고, AI와 디지털 도구를 활용해 더 효율적으로 일하며, 서로의 시도와 고민을 나누는 지식 공동체를 꿈꿉니다.
+          </p>
+          <p className="text-[16px] text-ink-muted leading-[1.8] mb-14">
+            작은 배움 하나, 짧은 기록 하나가 모여 더 나은 실천이 되고, 그 실천이 다시 누군가에게 용기와 방향이 되는 숲. 소소숲은 그런 성장을 오래도록 함께 가꾸는 기록소가 되고자 합니다.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { title: '기록하는 배움', desc: '배움은 기록될 때 오래 남고, 나눌 수 있는 지식이 됩니다.' },
+              { title: '나누는 지혜', desc: '혼자만의 경험을 함께 나누며 서로의 시행착오를 줄입니다.' },
+              { title: '자라는 실천', desc: '작은 시도와 꾸준한 적용이 현장의 변화를 만듭니다.' },
+            ].map((card) => (
+              <div key={card.title} className="bg-white/75 rounded-[16px] p-6 border border-black/8">
+                <h3 className="text-[16px] font-semibold text-ink mb-2">{card.title}</h3>
+                <p className="text-[14px] text-ink-muted leading-[1.7]">{card.desc}</p>
               </div>
             ))}
           </div>
