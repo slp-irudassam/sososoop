@@ -4,6 +4,7 @@ import { lectureDetails } from '@/data/lectureDetails';
 import { getLectures } from '@/lib/notion';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import AccountCopy from '@/components/AccountCopy';
 
 export const revalidate = 60;
 
@@ -253,15 +254,11 @@ export default async function LectureDetailPage({
               </ol>
             </div>
 
-            <div className="bg-primary/8 rounded-[12px] p-5 mb-6 border border-primary/20">
-              <p className="text-[14px] font-semibold text-ink mb-3">💳 입금 계좌</p>
-              <p className="text-[17px] font-semibold text-ink">
-                {lecture.accountInfo.bank} {lecture.accountInfo.number}
-              </p>
-              <p className="text-[14px] text-ink-muted mt-1">
-                예금주: {lecture.accountInfo.holder}
-              </p>
-            </div>
+            <AccountCopy
+              bank={lecture.accountInfo.bank}
+              number={lecture.accountInfo.number}
+              holder={lecture.accountInfo.holder}
+            />
 
             <a
               href={lecture.notionFormUrl}
