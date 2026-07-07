@@ -34,7 +34,7 @@ export default function AboutPage() {
           <div className="flex flex-col md:flex-row rounded-[24px] overflow-hidden mb-8 border border-hairline">
             {/* 카드 이미지 */}
             <div className="md:w-[280px] flex-none">
-              <Image src="/images/profile-card.png" alt="이루다쌤 프로필 카드" width={280} height={320} className="w-full h-full object-cover" />
+              <Image src="/images/profile-card.png" alt="이루다쌤 프로필 카드" width={280} height={320} className="w-full h-full object-cover object-left" />
             </div>
             {/* 텍스트 영역 */}
             <div className="bg-canvas flex-1 p-8 flex flex-col justify-center">
