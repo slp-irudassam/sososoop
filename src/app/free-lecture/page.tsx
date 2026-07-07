@@ -33,25 +33,19 @@ export default function FreeLecturePage() {
               특강 참여 방법을 안내해드립니다.
             </p>
 
-            {/* 노션폼 임베드 */}
-            <div className="w-full rounded-[12px] overflow-hidden border border-hairline bg-pearl min-h-[600px] flex items-center justify-center">
-              <div className="text-center px-6 py-12">
-                <p className="text-[17px] font-semibold text-ink mb-3">노션 신청서</p>
-                <p className="text-[14px] text-ink-muted mb-6">
-                  아래 버튼을 눌러 노션 신청서를 작성해주세요.
-                </p>
-                <a
-                  href="https://sunrise-wisteria-5ca.notion.site/f693a65dd06543e1b98fbac559dfc758"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-6 py-3 rounded-full bg-primary text-white text-[17px] hover:bg-primary-dark transition-colors active:scale-95"
-                >
-                  신청서 작성하기
-                </a>
-                <p className="text-[12px] text-ink-light mt-4">
-                  노션 계정이 없어도 신청 가능합니다.
-                </p>
-              </div>
+            {/* 노션폼 신청 버튼 */}
+            <div className="w-full rounded-[12px] border border-hairline bg-pearl px-6 py-8 text-center">
+              <a
+                href="https://sunrise-wisteria-5ca.notion.site/f693a65dd06543e1b98fbac559dfc758"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-6 py-3 rounded-full bg-primary text-white text-[17px] hover:bg-primary-dark transition-colors active:scale-95"
+              >
+                신청서 작성하기
+              </a>
+              <p className="text-[12px] text-ink-light mt-4">
+                노션 계정이 없어도 신청 가능합니다.
+              </p>
             </div>
           </div>
 
