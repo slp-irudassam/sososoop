@@ -10,11 +10,13 @@ export default async function LecturesPage() {
 
   return (
     <>
-      <section className="bg-tile-dark py-16 px-6">
-        <div className="max-w-[1000px] mx-auto">
+      <section className="relative overflow-hidden bg-tile-dark py-16 px-6">
+        <img src="/images/lectures-hero-online-class.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="relative z-10 max-w-[1000px] mx-auto">
           <p className="text-[14px] font-semibold text-primary-on-dark mb-2">온라인 강의</p>
-          <h1 className="text-[40px] font-semibold tracking-tight text-on-dark mb-4">강의 목록</h1>
-          <p className="text-[17px] text-on-dark/70 leading-[1.47]">
+          <h1 className="text-[40px] font-semibold tracking-tight text-white mb-4">강의 목록</h1>
+          <p className="text-[17px] text-white/70 leading-[1.47]">
             언어재활사와 교육 전문가를 위한 실전 강의입니다.
           </p>
         </div>

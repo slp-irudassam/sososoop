@@ -1,8 +1,10 @@
 export default function FreeLecturePage() {
   return (
     <>
-      <section className="bg-primary py-16 px-6">
-        <div className="max-w-[800px] mx-auto text-center">
+      <section className="relative overflow-hidden bg-primary py-16 px-6">
+        <img src="/images/free-lecture-hero-welcome-desk.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 max-w-[800px] mx-auto text-center">
           <p className="text-[14px] font-semibold text-white/70 mb-2 tracking-wide">SOSOSOOP</p>
           <h1 className="text-[40px] font-semibold tracking-tight text-white mb-4">
             무료특강 신청

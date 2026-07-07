@@ -17,8 +17,10 @@ export default async function ResourcesPage() {
 
   return (
     <>
-      <section className="bg-parchment py-16 px-6">
-        <div className="max-w-[1000px] mx-auto">
+      <section className="relative overflow-hidden bg-parchment py-16 px-6">
+        <img src="/images/resources-hero-library.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-white/70" />
+        <div className="relative z-10 max-w-[1000px] mx-auto">
           <p className="text-[14px] font-semibold text-primary mb-2">자료실</p>
           <h1 className="text-[40px] font-semibold tracking-tight text-ink mb-4">
             소소숲 자료실
