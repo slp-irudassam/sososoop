@@ -34,14 +34,14 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <p className="text-[12px] font-semibold text-ink mb-1">소셜</p>
+            <p className="text-[12px] font-semibold text-ink mb-1">고객센터</p>
             <a
               href="http://pf.kakao.com/_gngTX"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[12px] text-ink-muted hover:text-primary transition-colors"
             >
-              카카오채널 상담
+              카카오채널 @소소숲
             </a>
           </div>
         </div>
