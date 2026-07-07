@@ -18,7 +18,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-nav-black text-on-dark">
       <div className="max-w-[1200px] mx-auto px-6 h-11 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo.png" alt="소소숲 로고" width={28} height={28} className="invert" />
+          <Image src="/images/sososoop-logo-white.png" alt="소소숲 로고" width={28} height={28} />
           <span className="text-xs font-semibold tracking-tight text-on-dark">
             소소숲<span className="text-primary-on-dark">:지혜의 기록소</span>
           </span>

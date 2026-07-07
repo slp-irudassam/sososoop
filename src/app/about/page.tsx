@@ -11,7 +11,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 max-w-[800px] mx-auto text-center">
           <div className="flex justify-center mb-8">
-            <Image src="/logo.png" alt="소소숲 로고" width={80} height={80} className="invert opacity-90" />
+            <Image src="/images/sososoop-logo-white.png" alt="소소숲 로고" width={80} height={80} />
           </div>
           <h1 className="text-[40px] md:text-[56px] font-semibold tracking-tight text-white mb-5">
             소소숲:지혜의 기록소
