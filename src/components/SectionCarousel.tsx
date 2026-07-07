@@ -52,7 +52,7 @@ export default function SectionCarousel({ title, viewAllHref, cards, dark = fals
   };
 
   return (
-    <section className={dark ? 'bg-tile-dark' : 'bg-parchment'}>
+    <section className={dark ? 'bg-tile-dark' : 'bg-pearl'}>
       <div className="max-w-[1200px] mx-auto px-6 py-16">
         <div className="flex items-center justify-between mb-8">
           <h2 className={`text-[21px] font-semibold tracking-tight ${dark ? 'text-on-dark' : 'text-ink'}`}>

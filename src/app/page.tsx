@@ -50,7 +50,7 @@ export default async function HomePage() {
         title="LECTURES"
         viewAllHref="/lectures"
         cards={lectureCards}
-        dark={true}
+        dark={false}
       />
 
       <section className="bg-canvas">
