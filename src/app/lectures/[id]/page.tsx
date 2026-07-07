@@ -1,4 +1,5 @@
 import { lectures as staticLectures } from '@/data/lectures';
+import { lectureDetails } from '@/data/lectureDetails';
 import { getLectures } from '@/lib/notion';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -21,6 +22,8 @@ export default async function LectureDetailPage({
   const lecture = lectures.find((l) => l.id === id);
 
   if (!lecture) notFound();
+
+  const detail = lectureDetails[lecture.id];
 
   return (
     <>
@@ -57,11 +60,157 @@ export default async function LectureDetailPage({
             <span>⏱ {lecture.duration}</span>
             <span>🌲 소소숲</span>
           </div>
+          <a
+            href="#apply"
+            className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-full bg-primary text-white text-[15px] font-medium hover:bg-primary-dark transition-colors active:scale-95"
+          >
+            강의 신청하기 ↓
+          </a>
         </div>
       </section>
 
+      {/* 강의 상세 소개 */}
+      {detail && (
+        <section className="bg-parchment py-12 px-6">
+          <div className="max-w-[800px] mx-auto flex flex-col gap-8">
+            {/* 소개 */}
+            <p className="text-[17px] text-ink leading-[1.7]">{detail.intro}</p>
+
+            {/* 이런 분께 추천 */}
+            <div className="bg-canvas rounded-[18px] p-8 border border-hairline">
+              <h2 className="text-[21px] font-semibold text-ink mb-5">
+                이런 분께 추천해요
+              </h2>
+              <ul className="flex flex-col gap-3">
+                {detail.audience.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-2.5 text-[15px] text-ink-muted leading-relaxed"
+                  >
+                    <span className="text-primary mt-0.5">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 커리큘럼 */}
+            <div className="bg-canvas rounded-[18px] p-8 border border-hairline">
+              <h2 className="text-[21px] font-semibold text-ink mb-6">커리큘럼</h2>
+              <div className="flex flex-col gap-6">
+                {detail.curriculum.map((section) => (
+                  <div key={section.part}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="shrink-0 px-3 py-1 rounded-full bg-primary/10 text-primary text-[12px] font-semibold">
+                        {section.part}
+                      </span>
+                      <h3 className="text-[17px] font-semibold text-ink">
+                        {section.title}
+                      </h3>
+                    </div>
+                    <ul className="flex flex-col gap-2 pl-1">
+                      {section.items.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-2.5 text-[14px] text-ink-muted leading-relaxed"
+                        >
+                          <span className="text-primary/60 mt-0.5">·</span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 전체 제작 흐름 */}
+            {detail.flow && (
+              <div className="bg-canvas rounded-[18px] p-8 border border-hairline">
+                <h2 className="text-[21px] font-semibold text-ink mb-2">
+                  전체 제작 흐름
+                </h2>
+                <p className="text-[14px] text-ink-light mb-5">
+                  기획부터 출간까지, 이 순서대로 완성합니다.
+                </p>
+                <div className="flex flex-col">
+                  {detail.flow.map((row, i) => (
+                    <div
+                      key={row.step}
+                      className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 py-3 ${
+                        i > 0 ? 'border-t border-hairline' : ''
+                      }`}
+                    >
+                      <span className="text-[14px] text-ink font-medium">
+                        {row.step}
+                      </span>
+                      <span className="text-[13px] text-ink-light">{row.tool}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* 포함 혜택 + 준비물 */}
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-canvas rounded-[18px] p-8 border border-hairline">
+                <h2 className="text-[21px] font-semibold text-ink mb-5">
+                  포함된 혜택
+                </h2>
+                <ul className="flex flex-col gap-3">
+                  {detail.includes.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2.5 text-[14px] text-ink-muted leading-relaxed"
+                    >
+                      <span className="text-primary mt-0.5">🎁</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-canvas rounded-[18px] p-8 border border-hairline">
+                <h2 className="text-[21px] font-semibold text-ink mb-5">
+                  수강 전 준비물
+                </h2>
+                <ul className="flex flex-col gap-3">
+                  {detail.requirements.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2.5 text-[14px] text-ink-muted leading-relaxed"
+                    >
+                      <span className="text-primary mt-0.5">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* FAQ */}
+            <div className="bg-canvas rounded-[18px] p-8 border border-hairline">
+              <h2 className="text-[21px] font-semibold text-ink mb-6">
+                자주 묻는 질문
+              </h2>
+              <div className="flex flex-col gap-5">
+                {detail.faq.map((item) => (
+                  <div key={item.q}>
+                    <p className="text-[15px] font-semibold text-ink mb-1.5">
+                      Q. {item.q}
+                    </p>
+                    <p className="text-[14px] text-ink-muted leading-relaxed">
+                      {item.a}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* 가격 + 신청 안내 */}
-      <section className="bg-parchment py-12 px-6">
+      <section id="apply" className="bg-parchment py-12 px-6 scroll-mt-16">
         <div className="max-w-[800px] mx-auto">
           <div className="bg-canvas rounded-[18px] p-8 border border-hairline mb-8">
             <h2 className="text-[21px] font-semibold text-ink mb-6">강의 신청 안내</h2>
