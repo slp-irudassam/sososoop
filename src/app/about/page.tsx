@@ -31,26 +31,19 @@ export default function AboutPage() {
           <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-10">운영자 소개</h2>
 
           {/* 프로필 카드 */}
-          <div className="flex flex-col md:flex-row rounded-[24px] overflow-hidden mb-8 border border-hairline">
-            {/* 카드 이미지 */}
-            <div className="md:w-[280px] flex-none">
-              <Image src="/images/profile-card.png" alt="이루다쌤 프로필 카드" width={280} height={320} className="w-full h-full object-cover object-left" />
-            </div>
-            {/* 텍스트 영역 */}
-            <div className="bg-canvas flex-1 p-8 flex flex-col justify-center">
-              <h3 className="text-[24px] font-semibold text-ink mb-1">이루다쌤</h3>
-              <p className="text-[15px] text-ink-muted mb-5">기록으로 배움을 잇는 사람</p>
-              <p className="text-[14px] text-primary font-semibold mb-6">
-                언어재활사 · AI 활용 강사 · 교육 콘텐츠 제작자
-              </p>
-              <p className="text-[15px] text-ink-muted leading-[1.7] mb-4">
-                임상 현장에서 일하며 늘 이런 질문을 품었습니다.<br />
-                "더 효율적으로 일하고, 더 잘 기록하고, 더 따뜻하게 나눌 수는 없을까?"
-              </p>
-              <p className="text-[15px] text-ink-muted leading-[1.7]">
-                AI 도구를 활용해 임상 업무를 효율화하고, 그 경험을 강의와 콘텐츠로 나누고 있습니다. 소소숲은 그 여정에서 시작된 배움과 기록의 공간입니다.
-              </p>
-            </div>
+          <div className="bg-canvas rounded-[24px] p-8 mb-8 border border-hairline">
+            <h3 className="text-[24px] font-semibold text-ink mb-1">이루다쌤</h3>
+            <p className="text-[15px] text-ink-muted mb-5">기록으로 배움을 잇는 사람</p>
+            <p className="text-[14px] text-primary font-semibold mb-6">
+              언어재활사 · AI 활용 강사 · 교육 콘텐츠 제작자
+            </p>
+            <p className="text-[15px] text-ink-muted leading-[1.7] mb-4">
+              임상 현장에서 일하며 늘 이런 질문을 품었습니다.<br />
+              "더 효율적으로 일하고, 더 잘 기록하고, 더 따뜻하게 나눌 수는 없을까?"
+            </p>
+            <p className="text-[15px] text-ink-muted leading-[1.7]">
+              AI 도구를 활용해 임상 업무를 효율화하고, 그 경험을 강의와 콘텐츠로 나누고 있습니다. 소소숲은 그 여정에서 시작된 배움과 기록의 공간입니다.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
