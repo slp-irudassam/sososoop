@@ -40,14 +40,14 @@ export default async function HomePage() {
       <HeroSlider />
 
       <SectionCarousel
-        title="RESOURCES"
+        title="자료실"
         viewAllHref="/resources"
         cards={resourceCards}
         dark={false}
       />
 
       <SectionCarousel
-        title="LECTURES"
+        title="강의"
         viewAllHref="/lectures"
         cards={lectureCards}
         dark={false}
