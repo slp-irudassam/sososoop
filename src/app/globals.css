@@ -1,29 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #7D8C5A;
-  --color-primary-dark: #6b7a4a;
-  --color-primary-light: #a8bc77;
-  --color-primary-on-dark: #b8cc88;
-  --color-ink: #1d1d1f;
-  --color-ink-muted: #5c5c5c;
-  --color-ink-light: #888888;
-  --color-canvas: #ffffff;
-  --color-parchment: #f5f0ea;
-  --color-pearl: #faf8f5;
-  --color-tile-dark: #1e2410;
-  --color-tile-dark-2: #252c18;
-  --color-nav-black: #111111;
-  --color-on-dark: #ffffff;
-  --color-hairline: #e0dcd8;
-  --color-warm-tan: #c4a882;
+  --color-primary: #5C7A3C;
+  --color-primary-dark: #4A6530;
+  --color-primary-light: #87AD5A;
+  --color-primary-on-dark: #A8C87A;
+  --color-ink: #1A2416;
+  --color-ink-muted: #4A5840;
+  --color-ink-light: #7A8A72;
+  --color-canvas: #FAFAF5;
+  --color-parchment: #EEE8D8;
+  --color-pearl: #F5F0E8;
+  --color-tile-dark: #1E2D18;
+  --color-tile-dark-2: #243520;
+  --color-nav-black: #141E10;
+  --color-on-dark: #F5F0E8;
+  --color-hairline: #D5CCBC;
+  --color-warm-tan: #C8986A;
 
   --font-family-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Pretendard', sans-serif;
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #1d1d1f;
+  --background: #FAFAF5;
+  --foreground: #1A2416;
 }
 
 body {
