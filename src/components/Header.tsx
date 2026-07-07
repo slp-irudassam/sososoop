@@ -9,6 +9,7 @@ const navLinks = [
   { label: '자료실', href: '/resources' },
   { label: '강의', href: '/lectures' },
   { label: '무료특강 신청', href: '/free-lecture' },
+  { label: '고객센터', href: 'http://pf.kakao.com/_gngTX', external: true },
 ];
 
 export default function Header() {
@@ -25,15 +26,27 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-[12px] text-on-dark/80 hover:text-on-dark transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) =>
+            link.external ? (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[12px] text-on-dark/80 hover:text-on-dark transition-colors"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-[12px] text-on-dark/80 hover:text-on-dark transition-colors"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
         </nav>
 
         <button
@@ -53,16 +66,29 @@ export default function Header() {
 
       {menuOpen && (
         <nav className="md:hidden bg-[#1a1a1a] border-t border-white/10 px-6 py-4 flex flex-col gap-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm text-on-dark/80 hover:text-on-dark transition-colors"
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) =>
+            link.external ? (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-on-dark/80 hover:text-on-dark transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-on-dark/80 hover:text-on-dark transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            )
+          )}
         </nav>
       )}
     </header>
