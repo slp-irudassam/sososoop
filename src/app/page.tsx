@@ -57,7 +57,7 @@ export default async function HomePage() {
         <div className="max-w-[1200px] mx-auto px-6 py-20 text-center">
           <p className="text-[14px] font-semibold text-primary mb-3 tracking-wide">무료특강</p>
           <h2 className="text-[40px] font-semibold tracking-tight text-ink mb-4">
-            소소숲을 먼저 만나보세요.
+            소소숲을,<br />먼저 만나보세요.
           </h2>
           <p className="text-[17px] text-ink-muted leading-[1.47] mb-8 max-w-[480px] mx-auto">
             정규 강의 오픈에 앞서 진행하는 무료특강입니다.<br />신청하고 소소숲 콘텐츠를 경험해보세요.
