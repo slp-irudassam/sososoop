@@ -76,9 +76,10 @@ export default async function LectureDetailPage({
           <p className="text-[17px] text-on-dark/70 leading-[1.47] mb-6">
             {lecture.description}
           </p>
-          <div className="flex flex-wrap gap-4 text-[14px] text-on-dark/60">
-            <span>⏱ {lecture.duration}</span>
-            <span>🌲 소소숲</span>
+          <div className="flex flex-wrap items-center gap-3 text-[14px] text-on-dark/60">
+            <span>{lecture.duration}</span>
+            <span className="text-on-dark/30">·</span>
+            <span>소소숲</span>
           </div>
           <a
             href="#apply"
@@ -183,7 +184,7 @@ export default async function LectureDetailPage({
                       key={item}
                       className="flex items-start gap-2.5 text-[14px] text-ink-muted leading-relaxed"
                     >
-                      <span className="text-primary mt-0.5">🎁</span>
+                      <span className="text-primary mt-0.5">✓</span>
                       {item}
                     </li>
                   ))}
@@ -242,7 +243,7 @@ export default async function LectureDetailPage({
             </div>
 
             <div className="bg-parchment rounded-[12px] p-5 mb-6">
-              <p className="text-[14px] font-semibold text-ink mb-3">📌 신청 방법</p>
+              <p className="text-[14px] font-semibold text-ink mb-3">신청 방법</p>
               <ol className="flex flex-col gap-2 text-[14px] text-ink-muted leading-relaxed">
                 <li>1. 아래 계좌로 수강료를 이체합니다.</li>
                 <li>2. 아래 노션 신청서를 작성합니다.</li>

@@ -31,7 +31,7 @@ export default function AccountCopy({ bank, number, holder }: AccountCopyProps) 
 
   return (
     <div className="bg-primary/8 rounded-[12px] p-5 mb-6 border border-primary/20">
-      <p className="text-[14px] font-semibold text-ink mb-3">💳 입금 계좌</p>
+      <p className="text-[14px] font-semibold text-ink mb-3">입금 계좌</p>
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-[17px] font-semibold text-ink">
