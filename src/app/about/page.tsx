@@ -25,6 +25,40 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* 비전 */}
+      <section className="relative overflow-hidden bg-canvas py-24 px-6">
+        <img src="/images/about-mission.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-white/80" />
+        <div className="relative z-10 max-w-[800px] mx-auto">
+          <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-8">비전</h2>
+
+          <p className="text-[20px] font-medium text-ink leading-[1.6] mb-6">
+            배움이 기록이 되고,<br />
+            기록이 나눔이 되며,<br />
+            나눔이 다시 누군가의 성장으로 이어지는 공간을 만듭니다.
+          </p>
+          <p className="text-[16px] text-ink-muted leading-[1.8] mb-4">
+            소소숲은 언어재활사와 교육 전문가들이 각자의 현장에서 쌓아온 경험을 따뜻하게 기록하고, AI와 디지털 도구를 활용해 더 효율적으로 일하며, 서로의 시도와 고민을 나누는 지식 공동체를 꿈꿉니다.
+          </p>
+          <p className="text-[16px] text-ink-muted leading-[1.8] mb-14">
+            작은 배움 하나, 짧은 기록 하나가 모여 더 나은 실천이 되고, 그 실천이 다시 누군가에게 용기와 방향이 되는 숲. 소소숲은 그런 성장을 오래도록 함께 가꾸는 기록소가 되고자 합니다.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { title: '기록하는 배움', desc: '배움은 기록될 때 오래 남고, 나눌 수 있는 지식이 됩니다.' },
+              { title: '나누는 지혜', desc: '혼자만의 경험을 함께 나누며 서로의 시행착오를 줄입니다.' },
+              { title: '자라는 실천', desc: '작은 시도와 꾸준한 적용이 현장의 변화를 만듭니다.' },
+            ].map((card) => (
+              <div key={card.title} className="bg-white/75 rounded-[16px] p-6 border border-black/8">
+                <h3 className="text-[16px] font-semibold text-ink mb-2">{card.title}</h3>
+                <p className="text-[14px] text-ink-muted leading-[1.7]">{card.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* 운영자 소개 */}
       <section className="bg-parchment py-20 px-6">
         <div className="max-w-[800px] mx-auto">
@@ -122,40 +156,6 @@ export default function AboutPage() {
                 ))}
               </ul>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 비전 */}
-      <section className="relative overflow-hidden bg-canvas py-24 px-6">
-        <img src="/images/about-mission.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-white/80" />
-        <div className="relative z-10 max-w-[800px] mx-auto">
-          <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-8">비전</h2>
-
-          <p className="text-[20px] font-medium text-ink leading-[1.6] mb-6">
-            배움이 기록이 되고,<br />
-            기록이 나눔이 되며,<br />
-            나눔이 다시 누군가의 성장으로 이어지는 공간을 만듭니다.
-          </p>
-          <p className="text-[16px] text-ink-muted leading-[1.8] mb-4">
-            소소숲은 언어재활사와 교육 전문가들이 각자의 현장에서 쌓아온 경험을 따뜻하게 기록하고, AI와 디지털 도구를 활용해 더 효율적으로 일하며, 서로의 시도와 고민을 나누는 지식 공동체를 꿈꿉니다.
-          </p>
-          <p className="text-[16px] text-ink-muted leading-[1.8] mb-14">
-            작은 배움 하나, 짧은 기록 하나가 모여 더 나은 실천이 되고, 그 실천이 다시 누군가에게 용기와 방향이 되는 숲. 소소숲은 그런 성장을 오래도록 함께 가꾸는 기록소가 되고자 합니다.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              { title: '기록하는 배움', desc: '배움은 기록될 때 오래 남고, 나눌 수 있는 지식이 됩니다.' },
-              { title: '나누는 지혜', desc: '혼자만의 경험을 함께 나누며 서로의 시행착오를 줄입니다.' },
-              { title: '자라는 실천', desc: '작은 시도와 꾸준한 적용이 현장의 변화를 만듭니다.' },
-            ].map((card) => (
-              <div key={card.title} className="bg-white/75 rounded-[16px] p-6 border border-black/8">
-                <h3 className="text-[16px] font-semibold text-ink mb-2">{card.title}</h3>
-                <p className="text-[14px] text-ink-muted leading-[1.7]">{card.desc}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
