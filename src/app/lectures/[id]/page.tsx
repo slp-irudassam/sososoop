@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { lectures as staticLectures } from '@/data/lectures';
 import { lectureDetails } from '@/data/lectureDetails';
+import { lectureReviews } from '@/data/reviews';
 import { getLectures } from '@/lib/notion';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -44,6 +45,7 @@ export default async function LectureDetailPage({
   if (!lecture) notFound();
 
   const detail = lectureDetails[lecture.id];
+  const reviews = lectureReviews[lecture.id] ?? [];
 
   return (
     <>
@@ -228,6 +230,42 @@ export default async function LectureDetailPage({
                   ))}
                 </div>
               </div>
+
+              {/* 수강 후기 */}
+              {reviews.length > 0 && (
+                <div className="bg-canvas rounded-[18px] p-8 border border-hairline">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h2 className="text-[21px] font-semibold text-ink">수강 후기</h2>
+                    <span className="text-primary text-[15px]">★★★★★</span>
+                  </div>
+                  <p className="text-[14px] text-ink-light mb-6">
+                    실제로 강의를 듣고 남겨주신 후기예요.
+                  </p>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {reviews.map((review, i) => (
+                      <figure
+                        key={i}
+                        className="flex flex-col bg-parchment rounded-[14px] p-5 border border-hairline"
+                      >
+                        <span className="text-primary/40 text-[28px] leading-none font-serif mb-1">
+                          &ldquo;
+                        </span>
+                        <blockquote className="text-[14px] text-ink-muted leading-[1.65] flex-1">
+                          {review.text}
+                        </blockquote>
+                        <figcaption className="mt-4 text-[13px] font-semibold text-ink">
+                          {review.author ?? '수강생'}
+                          {review.role && (
+                            <span className="ml-1.5 font-normal text-ink-light">
+                              · {review.role}
+                            </span>
+                          )}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
