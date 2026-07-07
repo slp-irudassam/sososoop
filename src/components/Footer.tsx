@@ -36,14 +36,6 @@ export default function Footer() {
           <div className="flex flex-col gap-2">
             <p className="text-[12px] font-semibold text-ink mb-1">소셜</p>
             <a
-              href="https://www.instagram.com/slp_irudassam"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[12px] text-ink-muted hover:text-primary transition-colors"
-            >
-              인스타그램 @slp_irudassam
-            </a>
-            <a
               href="http://pf.kakao.com/_gngTX"
               target="_blank"
               rel="noopener noreferrer"

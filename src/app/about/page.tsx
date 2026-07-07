@@ -30,7 +30,7 @@ export default function AboutPage() {
         <img src="/images/about-mission.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-white/80" />
         <div className="relative z-10 max-w-[800px] mx-auto">
-          <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-8">비전</h2>
+          <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-8">Vision</h2>
 
           <p className="text-[20px] font-medium text-ink leading-[1.6] mb-6">
             배움이 기록이 되고,<br />
@@ -64,7 +64,7 @@ export default function AboutPage() {
         <img src="/images/about-hero2.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-white/75" />
         <div className="relative z-10 max-w-[800px] mx-auto">
-          <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-10">운영자 소개</h2>
+          <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-10">About</h2>
 
           {/* 프로필 카드 */}
           <div className="bg-canvas rounded-[24px] p-8 mb-8 border border-hairline">
