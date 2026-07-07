@@ -74,9 +74,9 @@ export default function AboutPage() {
               </ul>
             </div>
 
-            {/* 자격 · 면허 */}
+            {/* 자격 */}
             <div className="bg-canvas rounded-[18px] p-6 border border-hairline">
-              <p className="text-[13px] font-semibold text-primary mb-4 tracking-wide">자격 · 면허</p>
+              <p className="text-[13px] font-semibold text-primary mb-4 tracking-wide">자격</p>
               <ul className="flex flex-col gap-2">
                 {[
                   '언어재활사 1급 (보건복지부)',
