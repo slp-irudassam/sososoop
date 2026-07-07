@@ -13,18 +13,20 @@ export default function AboutPage() {
   return (
     <>
       {/* 히어로 */}
-      <section className="bg-tile-dark py-24 px-6">
-        <div className="max-w-[800px] mx-auto text-center">
+      <section className="relative overflow-hidden bg-tile-dark py-24 px-6">
+        <img src="/images/about-hero.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="relative z-10 max-w-[800px] mx-auto text-center">
           <div className="flex justify-center mb-8">
             <Image src="/logo.png" alt="소소숲 로고" width={80} height={80} className="invert opacity-90" />
           </div>
-          <h1 className="text-[40px] md:text-[56px] font-semibold tracking-tight text-on-dark mb-5">
+          <h1 className="text-[40px] md:text-[56px] font-semibold tracking-tight text-white mb-5">
             소소숲:지혜의 기록소
           </h1>
-          <p className="text-[21px] text-primary-on-dark mb-6">
+          <p className="text-[21px] text-white/80 mb-6">
             작은 것이 자라서 특별한 것이 됩니다.
           </p>
-          <p className="text-[17px] text-on-dark/70 leading-[1.47] max-w-[560px] mx-auto">
+          <p className="text-[17px] text-white/70 leading-[1.47] max-w-[560px] mx-auto">
             언어재활사와 교육 전문가들이 배움과 기록을 통해 함께 성장하는 따뜻한 지식 공동체입니다.
           </p>
         </div>
@@ -133,8 +135,10 @@ export default function AboutPage() {
       </section>
 
       {/* 미션 */}
-      <section className="bg-canvas py-20 px-6">
-        <div className="max-w-[800px] mx-auto">
+      <section className="relative overflow-hidden bg-canvas py-20 px-6">
+        <img src="/images/about-mission.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-white/70" />
+        <div className="relative z-10 max-w-[800px] mx-auto">
           <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-6">미션</h2>
           <blockquote className="border-l-4 border-primary pl-6 mb-8">
             <p className="text-[21px] text-ink leading-relaxed italic">
