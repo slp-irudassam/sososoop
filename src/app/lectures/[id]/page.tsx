@@ -55,7 +55,7 @@ export default async function LectureDetailPage({
           </p>
           <div className="flex flex-wrap gap-4 text-[14px] text-on-dark/60">
             <span>⏱ {lecture.duration}</span>
-            <span>🌲 이루다쌤 (이승윤)</span>
+            <span>🌲 소소숲</span>
           </div>
         </div>
       </section>

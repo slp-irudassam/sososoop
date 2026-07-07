@@ -26,14 +26,14 @@ export const freeResources: Resource[] = [
       "보고서, 치료계획, 부모상담에 바로 쓸 수 있는 프롬프트 50개",
     category: "AI 활용",
     fileUrl: "/files/언어치료·특수교육 AI 활용 프롬프트 50_무료공유_이루다쌤.pdf",
-    downloadName: "언어치료·특수교육 AI 활용 프롬프트 50_무료공유_이루다쌤.pdf",
+    downloadName: "언어치료·특수교육 AI 활용 프롬프트 50_무료공유_소소숲.pdf",
     fileType: "PDF",
     type: "free",
     image: "/images/resource-ai-prompt-guide.png",
   },
   {
     id: "reading-ssokssok-gpt",
-    title: "소소숲 vol2. 이루다쌤의 읽기학습지 생성봇 읽기쏙쏙",
+    title: "소소숲 vol2. 읽기학습지 생성봇 읽기쏙쏙",
     description:
       "학년과 주제 키워드만 입력하면, 해당 수준에 맞는 읽기 지문과 문제, 어휘 정리, 그리고 어울리는 이미지를 생성할 수 있는 프롬프트까지 자동으로 생성해주는 선생님을 위한 학습 자료 제작 GPT입니다.",
     category: "AI 활용",
@@ -93,7 +93,7 @@ export const paidResources: Resource[] = [
     accountInfo: {
       bank: "토스뱅크",
       number: "1000-1285-0842",
-      holder: "이승윤",
+      holder: "소소숲",
     },
   },
   {
@@ -110,7 +110,7 @@ export const paidResources: Resource[] = [
     accountInfo: {
       bank: "토스뱅크",
       number: "1000-1285-0842",
-      holder: "이승윤",
+      holder: "소소숲",
     },
   },
   // 유료 자료를 추가할 때 여기에 작성하세요. 예시:

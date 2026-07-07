@@ -28,7 +28,7 @@ export const lectures: Lecture[] = [
     accountInfo: {
       bank: "토스뱅크",
       number: "1000-1285-0842",
-      holder: "이승윤",
+      holder: "소소숲",
     },
   },
   {
@@ -44,7 +44,7 @@ export const lectures: Lecture[] = [
     accountInfo: {
       bank: "토스뱅크",
       number: "1000-1285-0842",
-      holder: "이승윤",
+      holder: "소소숲",
     },
   },
   {
@@ -60,7 +60,7 @@ export const lectures: Lecture[] = [
     accountInfo: {
       bank: "토스뱅크",
       number: "1000-1285-0842",
-      holder: "이승윤",
+      holder: "소소숲",
     },
   },
   {
@@ -76,7 +76,7 @@ export const lectures: Lecture[] = [
     accountInfo: {
       bank: "토스뱅크",
       number: "1000-1285-0842",
-      holder: "이승윤",
+      holder: "소소숲",
     },
   },
 ];
