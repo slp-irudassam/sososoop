@@ -32,7 +32,7 @@ const slides = [
     headline: '배움은 기록될 때\n자산이 됩니다.',
     sub: '임상에서 바로 쓸 수 있는 무료 자료를 지금 다운로드하세요.',
     cta: { label: '자료 다운로드', href: '/resources' },
-    ctaSecondary: { label: 'Lectures', href: '/lectures' },
+    ctaSecondary: { label: 'LECTURES', href: '/lectures' },
     bg: 'bg-tile-dark-2',
     dark: true,
     image: '/images/hero-3.png',
