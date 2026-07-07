@@ -8,7 +8,7 @@ export default function FreeLecturePage() {
             무료특강 신청
           </h1>
           <p className="text-[17px] text-white/80 leading-[1.47] max-w-[480px] mx-auto">
-            소소숲 정규 강의 홍보를 위해 진행하는 무료 특강입니다. 아래 신청서를 작성해주시면 특강 안내를 드립니다.
+            소소숲 정규 강의 홍보를 위해 진행하는 무료 특강입니다.<br />아래 신청서를 작성해주시면 특강 안내를 드립니다.
           </p>
         </div>
       </section>
