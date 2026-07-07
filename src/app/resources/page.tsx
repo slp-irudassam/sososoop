@@ -17,7 +17,7 @@ export default async function ResourcesPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-parchment min-h-[500px] py-24 md:py-32 px-6">
+      <section className="relative overflow-hidden bg-parchment min-h-[320px] py-16 md:py-20 px-6">
         <img src="/images/resources-hero-library.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-white/70" />
         <div className="relative z-10 max-w-[1000px] mx-auto">
