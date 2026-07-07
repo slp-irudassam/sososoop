@@ -8,7 +8,7 @@ export default function Footer() {
           <div>
             <p className="text-[14px] font-semibold text-ink mb-3">소소숲:지혜의 기록소</p>
             <p className="text-[12px] text-ink-muted leading-relaxed">
-              운영자: 소소숲 · 언어재활사 · AI 활용 강사
+              대표: 소소숲 · 언어재활사 · AI 활용 강사
             </p>
             <p className="text-[12px] text-ink-muted">
               문의: 카카오채널 @소소숲
