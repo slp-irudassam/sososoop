@@ -41,8 +41,8 @@ export default function AboutPage() {
           <div className="flex flex-col md:flex-row rounded-[24px] overflow-hidden mb-12 border border-hairline">
             {/* 사진 영역 */}
             <div className="bg-primary/15 flex items-center justify-center md:w-[260px] flex-none py-12 px-8">
-              <div className="w-36 h-36 rounded-full bg-primary/25 flex items-center justify-center text-6xl">
-                🌲
+              <div className="w-40 h-40 rounded-full overflow-hidden flex-none">
+                <Image src="/images/profile.png" alt="이루다쌤 프로필" width={160} height={160} className="w-full h-full object-cover" />
               </div>
             </div>
             {/* 텍스트 영역 */}
