@@ -44,15 +44,6 @@ export const lectureDetails: Record<string, LectureDetail> = {
         ],
       },
     ],
-    flow: [
-      { step: "1. 기획 — 주제·대상 연령·콘셉트", tool: "그림책 기획실 GPTs" },
-      { step: "2. 텍스트 — 페이지별 장면·문장", tool: "ChatGPT · Claude · Gemini" },
-      { step: "3. 스타일 — 레퍼런스 수집·선정", tool: "핀터레스트 · 캔바 매직미디어" },
-      { step: "4. 캐릭터 — 캐릭터 시트 제작", tool: "캐릭터 설계 GPTs" },
-      { step: "5. 삽화 — 장면별 이미지 생성", tool: "ChatGPT · Gemini · 캔바" },
-      { step: "6. 편집 — 내지·표지 구성", tool: "캔바" },
-      { step: "7. 등록 — 전자책·종이책 출간", tool: "유페이퍼 · 부크크" },
-    ],
     includes: [
       "라이브 강의 + 녹화본 다시보기 (수강 기간 3개월)",
       "강의 슬라이드 1·2편 (총 47장) 제공",
