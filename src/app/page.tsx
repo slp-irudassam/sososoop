@@ -60,7 +60,7 @@ export default async function HomePage() {
             소소숲을 먼저 만나보세요.
           </h2>
           <p className="text-[17px] text-ink-muted leading-[1.47] mb-8 max-w-[480px] mx-auto">
-            정규 강의 오픈에 앞서 진행하는 무료특강입니다. 신청하고 소소숲 콘텐츠를 경험해보세요.
+            정규 강의 오픈에 앞서 진행하는 무료특강입니다.<br />신청하고 소소숲 콘텐츠를 경험해보세요.
           </p>
           <Link
             href="/free-lecture"
