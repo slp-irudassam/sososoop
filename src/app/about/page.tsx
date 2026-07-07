@@ -6,7 +6,7 @@ export default function AboutPage() {
   return (
     <>
       {/* 히어로 */}
-      <section className="relative overflow-hidden bg-tile-dark py-24 px-6">
+      <section className="relative overflow-hidden bg-tile-dark min-h-[500px] py-24 md:py-32 px-6">
         <img src="/images/about-hero.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 max-w-[800px] mx-auto text-center">

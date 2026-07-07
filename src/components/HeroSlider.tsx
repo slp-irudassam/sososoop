@@ -62,7 +62,7 @@ export default function HeroSlider() {
   const hasImage = slide.image && !imgErrors[slide.id];
 
   return (
-    <section className={`relative w-full overflow-hidden ${!hasImage ? slide.bg : ''} transition-colors duration-700`}>
+    <section className={`relative w-full overflow-hidden min-h-[500px] ${!hasImage ? slide.bg : ''} transition-colors duration-700`}>
       {/* 배경 이미지 */}
       {hasImage ? (
         <>

@@ -1,7 +1,7 @@
 export default function FreeLecturePage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-primary py-32 px-6">
+      <section className="relative overflow-hidden bg-primary min-h-[500px] py-24 md:py-32 px-6">
         <img src="/images/free-lecture-hero-welcome-desk.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 max-w-[800px] mx-auto text-center">
