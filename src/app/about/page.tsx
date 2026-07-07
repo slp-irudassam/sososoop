@@ -36,19 +36,25 @@ export default function AboutPage() {
       <section className="bg-parchment py-20 px-6">
         <div className="max-w-[800px] mx-auto">
           <h2 className="text-[34px] font-semibold tracking-tight text-ink mb-10">운영자 소개</h2>
-          <div className="flex flex-col md:flex-row gap-10 items-start mb-12">
-            <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center flex-none text-4xl">
-              🌲
+
+          {/* 프로필 카드 */}
+          <div className="flex flex-col md:flex-row rounded-[24px] overflow-hidden mb-12 border border-hairline">
+            {/* 사진 영역 */}
+            <div className="bg-primary/15 flex items-center justify-center md:w-[260px] flex-none py-12 px-8">
+              <div className="w-36 h-36 rounded-full bg-primary/25 flex items-center justify-center text-6xl">
+                🌲
+              </div>
             </div>
-            <div>
-              <h3 className="text-[21px] font-semibold text-ink mb-2">이루다쌤 (이승윤)</h3>
-              <p className="text-[14px] text-primary font-semibold mb-4">
+            {/* 텍스트 영역 */}
+            <div className="bg-canvas flex-1 p-8 flex flex-col justify-center">
+              <h3 className="text-[24px] font-semibold text-ink mb-1">이루다쌤 (이승윤)</h3>
+              <p className="text-[14px] text-primary font-semibold mb-5">
                 언어재활사 · AI 활용 강사 · 교육 콘텐츠 제작자
               </p>
-              <p className="text-[17px] text-ink-muted leading-[1.47] mb-4">
+              <p className="text-[15px] text-ink-muted leading-[1.6] mb-3">
                 임상 현장에서 일하면서 "더 효율적으로 일하고, 더 잘 기록하고, 더 잘 나눌 수 없을까"라는 질문을 품었습니다.
               </p>
-              <p className="text-[17px] text-ink-muted leading-[1.47]">
+              <p className="text-[15px] text-ink-muted leading-[1.6]">
                 AI 도구를 활용해 임상 업무를 효율화하고, 그 경험을 콘텐츠로 만들어 나누고 있습니다. 소소숲은 그 여정의 기록입니다.
               </p>
             </div>
