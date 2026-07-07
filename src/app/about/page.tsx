@@ -20,7 +20,7 @@ export default function AboutPage() {
             작은 것이 자라서 특별한 것이 됩니다.
           </p>
           <p className="text-[17px] text-white/70 leading-[1.47] max-w-[560px] mx-auto">
-            언어재활사와 교육 전문가들이 배움과 기록을 통해 함께 성장하는 따뜻한 지식 공동체입니다.
+            언어재활사와 교육 전문가들이 배움과 기록을 통해 함께 성장하는<br />따뜻한 지식 공동체입니다.
           </p>
         </div>
       </section>
