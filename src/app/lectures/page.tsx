@@ -10,7 +10,7 @@ export default async function LecturesPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-tile-dark py-24 px-6">
+      <section className="relative overflow-hidden bg-tile-dark py-32 px-6">
         <img src="/images/lectures-hero-online-class.png" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 max-w-[1000px] mx-auto">
