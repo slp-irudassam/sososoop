@@ -44,6 +44,17 @@ export const freeResources: Resource[] = [
     image: "/images/resource-reading-gpt.png",
   },
   {
+    id: "handwriting-generator",
+    title: "글씨 연습장 생성기",
+    description:
+      "원하는 단어·문장·문단을 입력하면 받아쓰기·따라쓰기 연습지를 자동으로 만들어 바로 인쇄하거나 PDF로 저장할 수 있는 웹 도구입니다. 글꼴 12종, 안내선 5종, 칸 수·글자 크기, 회색 따라쓰기·검은 글씨·빈칸 연습 3가지 모드까지 아이 수준에 맞춰 세밀하게 조절할 수 있어요. 회원가입도, 프로그램 설치도, 비용도 전혀 없습니다.",
+    category: "AI 활용",
+    linkUrl: "https://slp-irudassam.github.io/korean-handwriting/",
+    fileType: "웹앱",
+    type: "free",
+    image: "/images/resource-handwriting-generat.png",
+  },
+  {
     id: "daily-record-template",
     title: "임상 일지 템플릿",
     description:
