@@ -1,19 +1,21 @@
 import HeroSlider from '@/components/HeroSlider';
 import SectionCarousel from '@/components/SectionCarousel';
 
-import { lectures } from '@/data/lectures';
+import { lectures as staticLectures } from '@/data/lectures';
 import { freeResources, paidResources } from '@/data/resources';
-import { getResources } from '@/lib/notion';
+import { getResources, getLectures } from '@/lib/notion';
 import Link from 'next/link';
 
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const notionResources = await getResources();
+  const [notionResources, notionLectures] = await Promise.all([getResources(), getLectures()]);
 
   const free = notionResources ? notionResources.filter((r) => r.type === 'free') : freeResources;
   const paid = notionResources ? notionResources.filter((r) => r.type === 'paid') : paidResources;
   const allResources = [...free, ...paid];
+
+  const lectures = notionLectures ?? staticLectures;
 
   const lectureCards = lectures.map((l) => ({
     id: l.id,
