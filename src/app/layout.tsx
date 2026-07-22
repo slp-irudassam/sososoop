@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: '%s | 소소숲',
   },
   description: SITE_DESCRIPTION,
-  keywords: ['언어재활사', 'AI 활용', '교육 콘텐츠', '소소숲'],
+  keywords: ['언어재활사', 'AI 활용', '교육 콘텐츠', '소소숲', '이루다쌤'],
   openGraph: {
     type: 'website',
     locale: 'ko_KR',

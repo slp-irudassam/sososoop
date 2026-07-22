@@ -81,7 +81,7 @@ export default async function LectureDetailPage({
           <div className="flex flex-wrap items-center gap-3 text-[14px] text-on-dark/60">
             <span>{lecture.duration}</span>
             <span className="text-on-dark/30">·</span>
-            <span>소소숲</span>
+            <span>이루다쌤 (이승윤)</span>
           </div>
           <a
             href="#apply"
