@@ -5,6 +5,11 @@
 	"compatibility_date": "2026-06-01",
 	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
 	"workers_dev": true,
+	"vars": {
+		// Supabase 공개키(클라이언트 번들에도 노출되는 값) — Worker 런타임에서도 접근 가능하게.
+		"NEXT_PUBLIC_SUPABASE_URL": "https://fqpjhgenuuxpatrcipwb.supabase.co",
+		"NEXT_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_jsZy-cACk0aNmJfQry10gQ_85R7D7rr"
+	},
 	"assets": {
 		"directory": ".open-next/assets",
 		"binding": "ASSETS"
