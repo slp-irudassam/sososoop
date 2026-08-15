@@ -124,6 +124,22 @@ export const paidResources: Resource[] = [
       holder: "이승윤",
     },
   },
+  {
+    id: "cbt-practice-pass",
+    title: "언어재활사 CBT 연습앱 이용권",
+    description:
+      "언어재활사 국가시험 CBT(컴퓨터 기반 시험) 형식을 그대로 재현한 온라인 실전 연습 프로그램 이용권입니다. 실제 시험과 동일한 교시 구성·제한시간·문항 유형으로 연습하고, 문제마다 상세한 오답풀이·해설을 제공합니다. 한 번 구매하면 기간 제한 없이 계속 이용할 수 있으며, 문항도 지속적으로 추가·업데이트됩니다. (실제 기출이 아닌 창작 연습 문항)",
+    category: "학습",
+    fileType: "웹앱",
+    type: "paid",
+    price: 7900,
+    notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
+    accountInfo: {
+      bank: "토스뱅크",
+      number: "1000-1285-0842",
+      holder: "이승윤",
+    },
+  },
   // 유료 자료를 추가할 때 여기에 작성하세요. 예시:
   // {
   //   id: "example-paid",
