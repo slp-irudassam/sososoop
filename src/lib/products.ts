@@ -25,6 +25,22 @@ async function loadLectures(): Promise<Lecture[]> {
   return (await getLectures()) ?? staticLectures;
 }
 
+function pickResource(paid: Resource[], id: string): Purchasable | null {
+  const res = paid.find((r) => r.id === id);
+  if (res && typeof res.price === 'number' && res.price > 0) {
+    return { id: res.id, title: res.title, orderName: res.title, amount: res.price, kind: 'resource' };
+  }
+  return null;
+}
+
+function pickLecture(lects: Lecture[], id: string): Purchasable | null {
+  const lec = lects.find((l) => l.id === id);
+  if (lec && typeof lec.price === 'number' && lec.price > 0) {
+    return { id: lec.id, title: lec.title, orderName: lec.title, amount: lec.price, kind: 'lecture' };
+  }
+  return null;
+}
+
 // id로 결제 상품 하나를 해석한다. 유료 자료를 먼저, 없으면 강의에서 찾는다.
 export async function getPurchasable(
   rawId: string | undefined | null,
@@ -40,27 +56,37 @@ export async function getPurchasable(
     if (cbt) id = cbt.id;
   }
 
-  const res = paid.find((r) => r.id === id);
-  if (res && typeof res.price === 'number' && res.price > 0) {
-    return {
-      id: res.id,
-      title: res.title,
-      orderName: res.title,
-      amount: res.price,
-      kind: 'resource',
-    };
+  return pickResource(paid, id) ?? pickLecture(lects, id);
+}
+
+export type Order = {
+  items: Purchasable[];
+  total: number;
+  orderName: string; // "상품명" 또는 "상품명 외 N건"
+};
+
+// 여러 id를 한 번의 데이터 조회로 주문으로 해석한다(장바구니 결제용).
+export async function resolveOrder(rawIds: string[]): Promise<Order | null> {
+  const ids = Array.from(new Set(rawIds.filter(Boolean)));
+  if (ids.length === 0) return null;
+
+  const [resources, lects] = await Promise.all([loadResources(), loadLectures()]);
+  const paid = resources.filter((r) => r.type === 'paid');
+  const cbt = paid.find((r) => r.title === CBT_TITLE);
+
+  const items: Purchasable[] = [];
+  for (const rawId of ids) {
+    const id = rawId === 'cbt' && cbt ? cbt.id : rawId;
+    if (items.some((it) => it.id === id)) continue; // 별칭 등으로 인한 중복 제거
+    const found = pickResource(paid, id) ?? pickLecture(lects, id);
+    if (found) items.push(found);
   }
 
-  const lec = lects.find((l) => l.id === id);
-  if (lec && typeof lec.price === 'number' && lec.price > 0) {
-    return {
-      id: lec.id,
-      title: lec.title,
-      orderName: lec.title,
-      amount: lec.price,
-      kind: 'lecture',
-    };
-  }
+  if (items.length === 0) return null;
 
-  return null;
+  const total = items.reduce((sum, it) => sum + it.amount, 0);
+  const orderName =
+    items.length === 1 ? items[0].orderName : `${items[0].orderName} 외 ${items.length - 1}건`;
+
+  return { items, total, orderName };
 }

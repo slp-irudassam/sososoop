@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { createClient } from '@/lib/supabase/client';
+import { cartCount, CART_EVENT } from '@/lib/cart';
 
 const navLinks = [
   { label: '소소숲 소개', href: '/about' },
@@ -25,6 +26,18 @@ function displayName(user: User) {
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [cartN, setCartN] = useState(0);
+
+  useEffect(() => {
+    const update = () => setCartN(cartCount());
+    update();
+    window.addEventListener(CART_EVENT, update);
+    window.addEventListener('storage', update);
+    return () => {
+      window.removeEventListener(CART_EVENT, update);
+      window.removeEventListener('storage', update);
+    };
+  }, []);
 
   useEffect(() => {
     const supabase = createClient();
@@ -69,6 +82,19 @@ export default function Header() {
               </Link>
             )
           )}
+
+          {/* 장바구니 */}
+          <Link
+            href="/cart"
+            className="relative text-[12px] text-on-dark/80 hover:text-on-dark transition-colors"
+          >
+            장바구니
+            {cartN > 0 && (
+              <span className="absolute -top-1.5 -right-3 min-w-[15px] h-[15px] px-1 rounded-full bg-primary text-white text-[10px] font-bold flex items-center justify-center">
+                {cartN}
+              </span>
+            )}
+          </Link>
 
           {/* 로그인 상태 */}
           <span className="w-px h-4 bg-white/20" aria-hidden />
@@ -134,6 +160,14 @@ export default function Header() {
               </Link>
             )
           )}
+
+          <Link
+            href="/cart"
+            className="text-sm text-on-dark/80 hover:text-on-dark transition-colors"
+            onClick={() => setMenuOpen(false)}
+          >
+            장바구니{cartN > 0 ? ` (${cartN})` : ''}
+          </Link>
 
           <span className="h-px bg-white/10" aria-hidden />
           {user ? (

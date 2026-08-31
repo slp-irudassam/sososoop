@@ -20,7 +20,6 @@ export default async function PaymentFailPage({
   return (
     <main className="min-h-[70vh] flex items-center justify-center px-5 py-12">
       <div className="w-full max-w-[440px] bg-pearl border border-hairline rounded-[18px] p-8 text-center">
-        <div className="text-[40px] mb-3">⚠️</div>
         <h1 className="text-[19px] font-bold text-ink mb-2">결제가 취소되었어요</h1>
         <p className="text-[14px] text-ink-muted leading-relaxed mb-2">
           {message || '결제가 완료되지 않았습니다. 다시 시도해 주세요.'}

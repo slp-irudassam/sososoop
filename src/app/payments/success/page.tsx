@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getPurchasable } from '@/lib/products';
+import { resolveOrder } from '@/lib/products';
 import { createClient } from '@/lib/supabase/server';
 
 export const dynamic = 'force-dynamic';
@@ -41,13 +41,17 @@ export default async function PaymentSuccessPage({
   const paymentKey = one(sp.paymentKey);
   const orderId = one(sp.orderId);
   const amount = Number(one(sp.amount));
-  const product = await getPurchasable(one(sp.product));
 
-  // 1) 금액 위변조 검증 — 서버 카탈로그 가격과 반드시 일치해야 승인 진행
+  // 결제한 주문(단일 product 또는 장바구니 items)을 서버에서 다시 해석해 금액을 검증한다.
+  const productParam = one(sp.product);
+  const ids = productParam ? [productParam] : one(sp.items).split(',').filter(Boolean);
+  const order = await resolveOrder(ids);
+
+  // 1) 금액 위변조 검증 — 서버가 계산한 총액과 반드시 일치해야 승인 진행
   let result: Awaited<ReturnType<typeof confirmPayment>> | { ok: false; message: string };
   if (!paymentKey || !orderId || !amount) {
     result = { ok: false, message: '결제 정보가 올바르지 않습니다.' };
-  } else if (!product || product.amount !== amount) {
+  } else if (!order || order.total !== amount) {
     result = { ok: false, message: '결제 금액이 주문 정보와 일치하지 않습니다.' };
   } else {
     // 2) 서버 승인
@@ -64,14 +68,14 @@ export default async function PaymentSuccessPage({
     | undefined;
 
   // 3) 주문 기록 (best-effort — 테이블/권한 없으면 조용히 건너뜀)
-  if (result.ok) {
+  if (result.ok && order) {
     try {
       const supabase = await createClient();
       await supabase.from('orders').insert({
         order_id: orderId,
         payment_key: paymentKey,
-        product_slug: product?.id ?? null,
-        order_name: product?.orderName ?? null,
+        product_slug: order.items.map((it) => it.id).join(','),
+        order_name: order.orderName,
         amount,
         status,
       });
@@ -84,7 +88,6 @@ export default async function PaymentSuccessPage({
     return (
       <main className="min-h-[70vh] flex items-center justify-center px-5 py-12">
         <div className="w-full max-w-[440px] bg-pearl border border-hairline rounded-[18px] p-8 text-center">
-          <div className="text-[40px] mb-3">⚠️</div>
           <h1 className="text-[19px] font-bold text-ink mb-2">결제를 완료하지 못했어요</h1>
           <p className="text-[14px] text-ink-muted leading-relaxed mb-6">{result.message}</p>
           <Link
@@ -103,10 +106,9 @@ export default async function PaymentSuccessPage({
     return (
       <main className="min-h-[70vh] flex items-center justify-center px-5 py-12">
         <div className="w-full max-w-[440px] bg-pearl border border-hairline rounded-[18px] p-8 text-center">
-          <div className="text-[40px] mb-3">🏦</div>
           <h1 className="text-[20px] font-bold text-ink mb-2">입금을 기다리고 있어요</h1>
           <p className="text-[14px] text-ink-muted leading-relaxed mb-6">
-            아래 가상계좌로 입금하면 {product?.title} 이용이 시작돼요.
+            아래 가상계좌로 입금하면 {order?.orderName} 이용이 시작돼요.
           </p>
 
           <div className="text-left bg-white border border-hairline rounded-[12px] p-5 mb-6 text-[13.5px]">
@@ -155,16 +157,15 @@ export default async function PaymentSuccessPage({
   return (
     <main className="min-h-[70vh] flex items-center justify-center px-5 py-12">
       <div className="w-full max-w-[440px] bg-pearl border border-hairline rounded-[18px] p-8 text-center">
-        <div className="text-[40px] mb-3">✅</div>
         <h1 className="text-[20px] font-bold text-ink mb-2">결제가 완료되었어요</h1>
         <p className="text-[14px] text-ink-muted leading-relaxed mb-6">
-          {product?.title} 구매가 정상 처리되었습니다.
+          {order?.orderName} 구매가 정상 처리되었습니다.
         </p>
 
         <div className="text-left bg-white border border-hairline rounded-[12px] p-5 mb-6 text-[13.5px]">
           <div className="flex justify-between py-1.5">
             <span className="text-ink-muted">상품</span>
-            <span className="text-ink font-medium">{product?.orderName}</span>
+            <span className="text-ink font-medium">{order?.orderName}</span>
           </div>
           <div className="flex justify-between py-1.5">
             <span className="text-ink-muted">결제 금액</span>

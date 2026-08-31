@@ -274,8 +274,9 @@ export default async function LectureDetailPage({
             productId={lecture.id}
             title={lecture.title}
             price={lecture.price}
+            image={lecture.image}
             badge="모집중"
-            note="신용·체크카드 · 토스페이먼츠 안전결제 · 결제 후 수강 안내"
+            note="토스페이먼츠 안전결제 · 카드 · 간편결제 · 계좌이체 · 가상계좌"
           />
         </div>
       </section>

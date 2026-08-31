@@ -6,33 +6,31 @@ import { loadTossPayments, ANONYMOUS } from '@tosspayments/tosspayments-sdk';
 
 const CLIENT_KEY = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY;
 
-type Product = {
-  id: string;
-  title: string;
+type Order = {
   orderName: string;
   amount: number;
+  lines: { title: string; amount: number }[];
+  query: string; // successUrl/failUrl에 붙일 주문 식별 쿼리 (product=.. 또는 items=..)
 };
 
 type MethodKey = 'CARD' | 'TRANSFER' | 'VIRTUAL_ACCOUNT' | 'MOBILE_PHONE';
 
-const METHODS: { key: MethodKey; label: string; desc: string; icon: string }[] = [
+const METHODS: { key: MethodKey; label: string; desc: string }[] = [
   {
     key: 'CARD',
     label: '카드 · 간편결제',
     desc: '신용·체크카드, 카카오페이·네이버페이·토스페이 등',
-    icon: '💳',
   },
-  { key: 'TRANSFER', label: '계좌이체', desc: '은행 계좌에서 바로 이체', icon: '🏦' },
+  { key: 'TRANSFER', label: '계좌이체', desc: '은행 계좌에서 바로 이체' },
   {
     key: 'VIRTUAL_ACCOUNT',
     label: '가상계좌 (무통장입금)',
     desc: '발급된 계좌로 입금하면 이용이 시작돼요',
-    icon: '🧾',
   },
-  { key: 'MOBILE_PHONE', label: '휴대폰 결제', desc: '통신요금과 함께 청구', icon: '📱' },
+  { key: 'MOBILE_PHONE', label: '휴대폰 결제', desc: '통신요금과 함께 청구' },
 ];
 
-export default function CheckoutClient({ product }: { product: Product }) {
+export default function CheckoutClient({ order }: { order: Order }) {
   const [selected, setSelected] = useState<MethodKey>('CARD');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -47,13 +45,13 @@ export default function CheckoutClient({ product }: { product: Product }) {
     try {
       const tossPayments = await loadTossPayments(CLIENT_KEY);
       const payment = tossPayments.payment({ customerKey: ANONYMOUS });
-      const orderId = `${product.id}-${crypto.randomUUID()}`.slice(0, 64);
+      const orderId = `sososoop-${crypto.randomUUID()}`.slice(0, 64);
       const base = {
-        amount: { currency: 'KRW' as const, value: product.amount },
+        amount: { currency: 'KRW' as const, value: order.amount },
         orderId,
-        orderName: product.orderName,
-        successUrl: `${window.location.origin}/payments/success?product=${product.id}`,
-        failUrl: `${window.location.origin}/payments/fail?product=${product.id}`,
+        orderName: order.orderName,
+        successUrl: `${window.location.origin}/payments/success?${order.query}`,
+        failUrl: `${window.location.origin}/payments/fail?${order.query}`,
       };
 
       if (selected === 'CARD') {
@@ -68,11 +66,12 @@ export default function CheckoutClient({ product }: { product: Product }) {
           },
         });
       } else if (selected === 'TRANSFER') {
-        await payment.requestPayment({ ...base, method: 'TRANSFER' });
+        // 계좌이체는 현재 페이지를 결제창으로 이동(self) — iframe 갇힘/타임아웃 후 닫기불가 방지
+        await payment.requestPayment({ ...base, method: 'TRANSFER', windowTarget: 'self' });
       } else if (selected === 'VIRTUAL_ACCOUNT') {
-        await payment.requestPayment({ ...base, method: 'VIRTUAL_ACCOUNT' });
+        await payment.requestPayment({ ...base, method: 'VIRTUAL_ACCOUNT', windowTarget: 'self' });
       } else {
-        await payment.requestPayment({ ...base, method: 'MOBILE_PHONE' });
+        await payment.requestPayment({ ...base, method: 'MOBILE_PHONE', windowTarget: 'self' });
       }
     } catch (e: unknown) {
       // 사용자가 결제창을 닫은 경우 등
@@ -92,11 +91,25 @@ export default function CheckoutClient({ product }: { product: Product }) {
 
         {/* 주문 요약 */}
         <div className="bg-pearl border border-hairline rounded-[16px] p-6 mb-5">
-          <p className="text-[16px] font-semibold text-ink leading-snug mb-3">{product.title}</p>
-          <div className="flex items-baseline justify-between border-t border-hairline pt-3">
-            <span className="text-[13px] text-ink-muted">총 결제금액 (1개)</span>
+          {order.lines.map((line, i) => (
+            <div
+              key={i}
+              className={`flex items-start justify-between gap-4 py-1.5 ${
+                i > 0 ? 'border-t border-hairline pt-2.5 mt-1' : ''
+              }`}
+            >
+              <span className="text-[14.5px] text-ink leading-snug">{line.title}</span>
+              <span className="text-[14.5px] text-ink font-medium whitespace-nowrap">
+                {line.amount.toLocaleString()}원
+              </span>
+            </div>
+          ))}
+          <div className="flex items-baseline justify-between border-t border-hairline pt-3 mt-2">
+            <span className="text-[13px] text-ink-muted">
+              총 결제금액 ({order.lines.length}개)
+            </span>
             <span className="text-[22px] font-bold text-ink">
-              {product.amount.toLocaleString()}원
+              {order.amount.toLocaleString()}원
             </span>
           </div>
         </div>
@@ -117,7 +130,6 @@ export default function CheckoutClient({ product }: { product: Product }) {
                     : 'border-hairline bg-pearl hover:border-primary/40'
                 }`}
               >
-                <span className="text-[22px] leading-none">{m.icon}</span>
                 <span className="flex-1">
                   <span className="block text-[15px] font-semibold text-ink">{m.label}</span>
                   <span className="block text-[12px] text-ink-muted mt-0.5">{m.desc}</span>
@@ -141,17 +153,17 @@ export default function CheckoutClient({ product }: { product: Product }) {
           disabled={loading}
           className="w-full py-3.5 rounded-full bg-primary text-white text-[16px] font-semibold hover:bg-primary-dark transition-colors active:scale-[0.99] disabled:opacity-60"
         >
-          {loading ? '결제창을 여는 중…' : `${product.amount.toLocaleString()}원 결제하기`}
+          {loading ? '결제창을 여는 중…' : `${order.amount.toLocaleString()}원 결제하기`}
         </button>
 
         <p className="text-[11.5px] text-ink-light leading-relaxed mt-4 text-center">
           토스페이먼츠 안전결제
         </p>
         <Link
-          href="/resources"
+          href="/cart"
           className="block text-center text-[12.5px] text-ink-muted underline mt-3"
         >
-          취소하고 자료실로 돌아가기
+          장바구니로 돌아가기
         </Link>
       </div>
     </main>

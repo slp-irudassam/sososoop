@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getPurchasable } from '@/lib/products';
+import { resolveOrder } from '@/lib/products';
 import CheckoutClient from './CheckoutClient';
 
 export const revalidate = 60;
@@ -7,15 +7,18 @@ export const revalidate = 60;
 export default async function CheckoutPage({
   searchParams,
 }: {
-  searchParams: Promise<{ product?: string }>;
+  searchParams: Promise<{ product?: string; items?: string }>;
 }) {
-  const { product: pid } = await searchParams;
-  const product = await getPurchasable(pid);
+  const { product, items } = await searchParams;
 
-  if (!product) {
+  // 단일 상품(구매하기) 또는 장바구니(items=id1,id2) 주문을 해석한다.
+  const ids = product ? [product] : (items ?? '').split(',').filter(Boolean);
+  const order = await resolveOrder(ids);
+
+  if (!order) {
     return (
       <main className="min-h-[70vh] flex flex-col items-center justify-center gap-4 px-6 text-center">
-        <p className="text-[17px] font-semibold text-ink">상품을 찾을 수 없어요.</p>
+        <p className="text-[17px] font-semibold text-ink">주문할 상품을 찾을 수 없어요.</p>
         <Link href="/resources" className="text-primary underline text-[14px]">
           자료실로 돌아가기
         </Link>
@@ -23,5 +26,19 @@ export default async function CheckoutPage({
     );
   }
 
-  return <CheckoutClient product={product} />;
+  // 결제 성공/실패 후 서버가 같은 주문을 재해석해 금액을 검증하도록 쿼리를 그대로 넘긴다.
+  const query = product
+    ? `product=${encodeURIComponent(product)}`
+    : `items=${encodeURIComponent(order.items.map((it) => it.id).join(','))}`;
+
+  return (
+    <CheckoutClient
+      order={{
+        orderName: order.orderName,
+        amount: order.total,
+        lines: order.items.map((it) => ({ title: it.title, amount: it.amount })),
+        query,
+      }}
+    />
+  );
 }
