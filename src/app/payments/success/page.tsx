@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { productBySlug } from '@/lib/checkout';
+import { getPurchasable } from '@/lib/products';
 import { createClient } from '@/lib/supabase/server';
 
 export const dynamic = 'force-dynamic';
@@ -41,7 +41,7 @@ export default async function PaymentSuccessPage({
   const paymentKey = one(sp.paymentKey);
   const orderId = one(sp.orderId);
   const amount = Number(one(sp.amount));
-  const product = productBySlug(one(sp.product));
+  const product = await getPurchasable(one(sp.product));
 
   // 1) 금액 위변조 검증 — 서버 카탈로그 가격과 반드시 일치해야 승인 진행
   let result: Awaited<ReturnType<typeof confirmPayment>> | { ok: false; message: string };
@@ -61,7 +61,7 @@ export default async function PaymentSuccessPage({
       await supabase.from('orders').insert({
         order_id: orderId,
         payment_key: paymentKey,
-        product_slug: product?.slug ?? null,
+        product_slug: product?.id ?? null,
         order_name: product?.orderName ?? null,
         amount,
         status: 'DONE',

@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { type Resource } from '@/data/resources';
-import { checkoutSlugForTitle } from '@/lib/checkout';
 
 const categoryColors: Record<string, string> = {
   'AI 활용': 'bg-blue-50 text-blue-700',
@@ -114,26 +113,12 @@ function PaidResourceCard({ resource }: { resource: Resource }) {
       <p className="text-[19px] font-semibold text-ink mb-4">
         {resource.price?.toLocaleString()}원
       </p>
-      {(() => {
-        const slug = checkoutSlugForTitle(resource.title);
-        return slug ? (
-          <Link
-            href={`/checkout?product=${slug}`}
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-primary text-white text-[14px] font-medium hover:bg-primary-dark transition-colors active:scale-95 self-start"
-          >
-            구매하기
-          </Link>
-        ) : (
-          <a
-            href={resource.notionFormUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-primary text-white text-[14px] font-medium hover:bg-primary-dark transition-colors active:scale-95 self-start"
-          >
-            구매 신청하기
-          </a>
-        );
-      })()}
+      <Link
+        href={`/resources/${resource.id}`}
+        className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-primary text-white text-[14px] font-medium hover:bg-primary-dark transition-colors active:scale-95 self-start"
+      >
+        자세히 보기
+      </Link>
       </div>
     </article>
   );

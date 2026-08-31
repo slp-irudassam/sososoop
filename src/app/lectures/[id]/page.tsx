@@ -5,7 +5,7 @@ import { lectureReviews } from '@/data/reviews';
 import { getLectures } from '@/lib/notion';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import AccountCopy from '@/components/AccountCopy';
+import PurchaseBox from '@/components/PurchaseBox';
 
 export const revalidate = 60;
 
@@ -87,7 +87,7 @@ export default async function LectureDetailPage({
             href="#apply"
             className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-full bg-primary text-white text-[15px] font-medium hover:bg-primary-dark transition-colors active:scale-95 lg:hidden"
           >
-            강의 신청하기 ↓
+            결제하기 ↓
           </a>
         </div>
       </section>
@@ -269,73 +269,14 @@ export default async function LectureDetailPage({
             </div>
           )}
 
-          {/* 오른쪽: 신청 박스 (데스크톱에서 스크롤 고정) */}
-          <aside
-            id="apply"
-            className="lg:sticky lg:top-24 flex flex-col gap-6 scroll-mt-24"
-          >
-            <div className="bg-canvas rounded-[18px] p-6 border border-hairline">
-              <span className="inline-block text-[12px] font-semibold text-primary mb-3">
-                모집중
-              </span>
-              <h2 className="text-[18px] font-semibold text-ink leading-snug mb-4">
-                {lecture.title}
-              </h2>
-
-              <div className="flex items-baseline gap-2 mb-5 pb-5 border-b border-hairline">
-                <span className="text-[28px] font-semibold text-ink">
-                  {lecture.price.toLocaleString()}원
-                </span>
-              </div>
-
-              <div className="bg-parchment rounded-[12px] p-4 mb-5">
-                <p className="text-[13px] font-semibold text-ink mb-2.5">신청 방법</p>
-                <ol className="flex flex-col gap-1.5 text-[13px] text-ink-muted leading-relaxed">
-                  <li>1. 아래 계좌로 수강료를 이체합니다.</li>
-                  <li>2. 노션 신청서를 작성합니다.</li>
-                  <li>
-                    3. 카카오채널에서{' '}
-                    <span className="font-semibold text-ink">'신청완료'</span>를
-                    입력합니다.
-                  </li>
-                </ol>
-              </div>
-
-              <AccountCopy
-                bank={lecture.accountInfo.bank}
-                number={lecture.accountInfo.number}
-                holder={lecture.accountInfo.holder}
-              />
-
-              <a
-                href={lecture.notionFormUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-primary text-white text-[16px] font-medium hover:bg-primary-dark transition-colors active:scale-95"
-              >
-                신청서 작성하기 (노션폼)
-              </a>
-
-              <p className="text-[12px] text-ink-light text-center mt-3 leading-relaxed">
-                신청서 작성 후 입금 → 카카오채널 '신청완료' 입력 순서로 진행해주세요.
-              </p>
-            </div>
-
-            <div className="bg-canvas rounded-[18px] p-6 border border-hairline">
-              <p className="text-[14px] font-semibold text-ink mb-3">문의</p>
-              <p className="text-[14px] text-ink-muted mb-4">
-                강의에 대해 궁금한 점은 카카오채널로 문의해주세요.
-              </p>
-              <a
-                href="http://pf.kakao.com/_gngTX"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FEE500] text-[#3C1E1E] text-[14px] font-semibold hover:opacity-90 transition-opacity"
-              >
-                카카오채널 문의하기
-              </a>
-            </div>
-          </aside>
+          {/* 오른쪽: 결제 박스 (데스크톱에서 스크롤 고정) */}
+          <PurchaseBox
+            productId={lecture.id}
+            title={lecture.title}
+            price={lecture.price}
+            badge="모집중"
+            note="신용·체크카드 · 토스페이먼츠 안전결제 · 결제 후 수강 안내"
+          />
         </div>
       </section>
     </>
