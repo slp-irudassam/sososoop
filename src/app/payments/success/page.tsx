@@ -54,6 +54,15 @@ export default async function PaymentSuccessPage({
     result = await confirmPayment(paymentKey, orderId, amount);
   }
 
+  // 결제수단에 따라 승인 결과 상태가 다르다.
+  // 가상계좌는 즉시 완료가 아니라 '입금 대기(WAITING_FOR_DEPOSIT)' 상태로 승인된다.
+  const confirmed = result.ok ? (result.data as Record<string, unknown>) : null;
+  const status = (confirmed?.status as string) || 'DONE';
+  const isDeposit = status === 'WAITING_FOR_DEPOSIT';
+  const va = confirmed?.virtualAccount as
+    | { accountNumber?: string; bank?: string; bankCode?: string; dueDate?: string }
+    | undefined;
+
   // 3) 주문 기록 (best-effort — 테이블/권한 없으면 조용히 건너뜀)
   if (result.ok) {
     try {
@@ -64,7 +73,7 @@ export default async function PaymentSuccessPage({
         product_slug: product?.id ?? null,
         order_name: product?.orderName ?? null,
         amount,
-        status: 'DONE',
+        status,
       });
     } catch {
       // no-op
@@ -78,6 +87,60 @@ export default async function PaymentSuccessPage({
           <div className="text-[40px] mb-3">⚠️</div>
           <h1 className="text-[19px] font-bold text-ink mb-2">결제를 완료하지 못했어요</h1>
           <p className="text-[14px] text-ink-muted leading-relaxed mb-6">{result.message}</p>
+          <Link
+            href="/resources"
+            className="inline-block px-6 py-3 rounded-full bg-primary text-white text-[14px] font-medium"
+          >
+            자료실로 돌아가기
+          </Link>
+        </div>
+      </main>
+    );
+  }
+
+  // 가상계좌: 입금 전이므로 '입금 안내' 화면을 보여준다.
+  if (isDeposit) {
+    return (
+      <main className="min-h-[70vh] flex items-center justify-center px-5 py-12">
+        <div className="w-full max-w-[440px] bg-pearl border border-hairline rounded-[18px] p-8 text-center">
+          <div className="text-[40px] mb-3">🏦</div>
+          <h1 className="text-[20px] font-bold text-ink mb-2">입금을 기다리고 있어요</h1>
+          <p className="text-[14px] text-ink-muted leading-relaxed mb-6">
+            아래 가상계좌로 입금하면 {product?.title} 이용이 시작돼요.
+          </p>
+
+          <div className="text-left bg-white border border-hairline rounded-[12px] p-5 mb-6 text-[13.5px]">
+            {va?.accountNumber && (
+              <div className="flex justify-between py-1.5">
+                <span className="text-ink-muted">입금 계좌</span>
+                <span className="text-ink font-semibold">
+                  {va.bank ? `${va.bank} ` : ''}
+                  {va.accountNumber}
+                </span>
+              </div>
+            )}
+            <div className="flex justify-between py-1.5">
+              <span className="text-ink-muted">입금 금액</span>
+              <span className="text-ink font-semibold">{amount.toLocaleString()}원</span>
+            </div>
+            {va?.dueDate && (
+              <div className="flex justify-between py-1.5">
+                <span className="text-ink-muted">입금 기한</span>
+                <span className="text-ink font-medium">
+                  {new Date(va.dueDate).toLocaleString('ko-KR')}
+                </span>
+              </div>
+            )}
+            <div className="flex justify-between py-1.5">
+              <span className="text-ink-muted">주문번호</span>
+              <span className="text-ink font-mono text-[12px]">{orderId}</span>
+            </div>
+          </div>
+
+          <p className="text-[12px] text-ink-light leading-relaxed mb-5">
+            입금이 확인되면 카카오채널로 안내드려요. 입금 기한이 지나면 주문이 자동
+            취소됩니다.
+          </p>
           <Link
             href="/resources"
             className="inline-block px-6 py-3 rounded-full bg-primary text-white text-[14px] font-medium"
