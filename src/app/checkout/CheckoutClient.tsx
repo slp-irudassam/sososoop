@@ -1,12 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import {
-  loadTossPayments,
-  ANONYMOUS,
-  type TossPaymentsWidgets,
-} from '@tosspayments/tosspayments-sdk';
+import { loadTossPayments, ANONYMOUS } from '@tosspayments/tosspayments-sdk';
 
 const CLIENT_KEY = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY;
 
@@ -17,56 +13,69 @@ type Product = {
   amount: number;
 };
 
+type MethodKey = 'CARD' | 'TRANSFER' | 'VIRTUAL_ACCOUNT' | 'MOBILE_PHONE';
+
+const METHODS: { key: MethodKey; label: string; desc: string; icon: string }[] = [
+  {
+    key: 'CARD',
+    label: '카드 · 간편결제',
+    desc: '신용·체크카드, 카카오페이·네이버페이·토스페이 등',
+    icon: '💳',
+  },
+  { key: 'TRANSFER', label: '계좌이체', desc: '은행 계좌에서 바로 이체', icon: '🏦' },
+  {
+    key: 'VIRTUAL_ACCOUNT',
+    label: '가상계좌 (무통장입금)',
+    desc: '발급된 계좌로 입금하면 이용이 시작돼요',
+    icon: '🧾',
+  },
+  { key: 'MOBILE_PHONE', label: '휴대폰 결제', desc: '통신요금과 함께 청구', icon: '📱' },
+];
+
 export default function CheckoutClient({ product }: { product: Product }) {
-  const [ready, setReady] = useState(false);
+  const [selected, setSelected] = useState<MethodKey>('CARD');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const widgetsRef = useRef<TossPaymentsWidgets | null>(null);
-  const initedRef = useRef(false);
 
-  // 결제 위젯(결제수단 + 약관) 렌더링 — 카드·간편결제·계좌이체·가상계좌 등
-  // 상점관리자에서 켜둔 결제수단이 모두 노출된다.
-  useEffect(() => {
+  async function handlePay() {
+    setError('');
     if (!CLIENT_KEY) {
       setError('결제 설정이 완료되지 않았습니다. 잠시 후 다시 시도해 주세요.');
       return;
     }
-    if (initedRef.current) return;
-    initedRef.current = true;
-
-    (async () => {
-      try {
-        const tossPayments = await loadTossPayments(CLIENT_KEY);
-        const widgets = tossPayments.widgets({ customerKey: ANONYMOUS });
-        widgetsRef.current = widgets;
-
-        await widgets.setAmount({ currency: 'KRW', value: product.amount });
-        await Promise.all([
-          widgets.renderPaymentMethods({ selector: '#payment-method', variantKey: 'DEFAULT' }),
-          widgets.renderAgreement({ selector: '#agreement', variantKey: 'AGREEMENT' }),
-        ]);
-        setReady(true);
-      } catch (e: unknown) {
-        setError(e instanceof Error ? e.message : '결제 수단을 불러오지 못했습니다.');
-      }
-    })();
-  }, [product.amount]);
-
-  async function handlePay() {
-    setError('');
-    const widgets = widgetsRef.current;
-    if (!widgets) return;
     setLoading(true);
     try {
+      const tossPayments = await loadTossPayments(CLIENT_KEY);
+      const payment = tossPayments.payment({ customerKey: ANONYMOUS });
       const orderId = `${product.id}-${crypto.randomUUID()}`.slice(0, 64);
-      await widgets.requestPayment({
+      const base = {
+        amount: { currency: 'KRW' as const, value: product.amount },
         orderId,
         orderName: product.orderName,
         successUrl: `${window.location.origin}/payments/success?product=${product.id}`,
         failUrl: `${window.location.origin}/payments/fail?product=${product.id}`,
-      });
+      };
+
+      if (selected === 'CARD') {
+        await payment.requestPayment({
+          ...base,
+          method: 'CARD',
+          card: {
+            useEscrow: false,
+            flowMode: 'DEFAULT', // 카드+간편결제 통합결제창
+            useCardPoint: false,
+            useAppCardOnly: false,
+          },
+        });
+      } else if (selected === 'TRANSFER') {
+        await payment.requestPayment({ ...base, method: 'TRANSFER' });
+      } else if (selected === 'VIRTUAL_ACCOUNT') {
+        await payment.requestPayment({ ...base, method: 'VIRTUAL_ACCOUNT' });
+      } else {
+        await payment.requestPayment({ ...base, method: 'MOBILE_PHONE' });
+      }
     } catch (e: unknown) {
-      // 사용자가 결제창을 닫거나, 필수 약관 미동의 등
+      // 사용자가 결제창을 닫은 경우 등
       const msg = e instanceof Error ? e.message : '결제를 시작하지 못했습니다.';
       setError(msg);
       setLoading(false);
@@ -92,30 +101,51 @@ export default function CheckoutClient({ product }: { product: Product }) {
           </div>
         </div>
 
-        {/* 결제수단 위젯 */}
-        <div className="bg-pearl border border-hairline rounded-[16px] overflow-hidden mb-1">
-          <div id="payment-method" />
-          <div id="agreement" />
+        {/* 결제수단 선택 */}
+        <p className="text-[13px] font-semibold text-ink mb-2.5 px-1">결제수단</p>
+        <div className="flex flex-col gap-2.5 mb-5">
+          {METHODS.map((m) => {
+            const active = selected === m.key;
+            return (
+              <button
+                key={m.key}
+                type="button"
+                onClick={() => setSelected(m.key)}
+                className={`flex items-center gap-3 w-full text-left px-4 py-3.5 rounded-[14px] border transition-colors ${
+                  active
+                    ? 'border-primary bg-primary/5'
+                    : 'border-hairline bg-pearl hover:border-primary/40'
+                }`}
+              >
+                <span className="text-[22px] leading-none">{m.icon}</span>
+                <span className="flex-1">
+                  <span className="block text-[15px] font-semibold text-ink">{m.label}</span>
+                  <span className="block text-[12px] text-ink-muted mt-0.5">{m.desc}</span>
+                </span>
+                <span
+                  className={`shrink-0 w-[18px] h-[18px] rounded-full border-2 flex items-center justify-center ${
+                    active ? 'border-primary' : 'border-hairline'
+                  }`}
+                >
+                  {active && <span className="w-[9px] h-[9px] rounded-full bg-primary" />}
+                </span>
+              </button>
+            );
+          })}
         </div>
 
-        {error && (
-          <p className="text-[13px] text-red-600 my-3 leading-relaxed px-1">{error}</p>
-        )}
+        {error && <p className="text-[13px] text-red-600 mb-3 leading-relaxed px-1">{error}</p>}
 
         <button
           onClick={handlePay}
-          disabled={loading || !ready}
-          className="w-full mt-4 py-3.5 rounded-full bg-primary text-white text-[16px] font-semibold hover:bg-primary-dark transition-colors active:scale-[0.99] disabled:opacity-60"
+          disabled={loading}
+          className="w-full py-3.5 rounded-full bg-primary text-white text-[16px] font-semibold hover:bg-primary-dark transition-colors active:scale-[0.99] disabled:opacity-60"
         >
-          {loading
-            ? '결제창을 여는 중…'
-            : ready
-              ? `${product.amount.toLocaleString()}원 결제하기`
-              : '결제수단 불러오는 중…'}
+          {loading ? '결제창을 여는 중…' : `${product.amount.toLocaleString()}원 결제하기`}
         </button>
 
         <p className="text-[11.5px] text-ink-light leading-relaxed mt-4 text-center">
-          토스페이먼츠 안전결제 · 카드 · 간편결제 · 계좌이체 · 가상계좌
+          토스페이먼츠 안전결제
         </p>
         <Link
           href="/resources"
