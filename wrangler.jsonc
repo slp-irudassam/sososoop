@@ -14,6 +14,13 @@
 		"directory": ".open-next/assets",
 		"binding": "ASSETS"
 	},
+	// OpenNext 증분 캐시(ISR/SSG) 저장소 — 상세페이지가 매 요청 풀 SSR 되지 않도록 캐시.
+	"kv_namespaces": [
+		{
+			"binding": "NEXT_INC_CACHE_KV",
+			"id": "e9361786645a4cc6b87b5b4249d2ce8b"
+		}
+	],
 	"routes": [
 		{
 			"pattern": "sososoop.com",
