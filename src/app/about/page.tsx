@@ -173,7 +173,7 @@ export default function AboutPage() {
       <section className="bg-tile-dark py-20 px-6 text-center">
         <h2 className="text-[34px] font-semibold text-on-dark mb-4">함께 성장을 시작하세요.</h2>
         <p className="text-[17px] text-on-dark/70 mb-8">
-          강의, 자료, 무료특강으로 소소숲을 경험해보세요.
+          강의와 자료로 소소숲을 경험해보세요.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
           <Link
@@ -183,10 +183,10 @@ export default function AboutPage() {
             강의 보러가기
           </Link>
           <Link
-            href="/free-lecture"
+            href="/resources"
             className="px-6 py-3 rounded-full border border-on-dark/30 text-on-dark text-[17px] hover:border-on-dark/60 transition-colors"
           >
-            무료특강 신청
+            자료 보러가기
           </Link>
         </div>
       </section>

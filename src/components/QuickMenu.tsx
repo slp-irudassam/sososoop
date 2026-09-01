@@ -3,7 +3,7 @@ import Link from 'next/link';
 const menuItems = [
   { label: '자료실', href: '/resources', emoji: '📂' },
   { label: '강의 신청', href: '/lectures', emoji: '🎓' },
-  { label: '무료특강', href: '/free-lecture', emoji: '🌱' },
+  { label: '한글놀이', href: '/hangul', emoji: '🌱' },
   { label: '소소숲 소개', href: '/about', emoji: '🌲' },
   { label: '카카오채널', href: 'http://pf.kakao.com/_gngTX', emoji: '💬', external: true },
   { label: '인스타그램', href: 'https://instagram.com/slp_irudassam', emoji: '📸', external: true },

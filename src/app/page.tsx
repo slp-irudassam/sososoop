@@ -4,7 +4,6 @@ import SectionCarousel from '@/components/SectionCarousel';
 import { lectures as staticLectures } from '@/data/lectures';
 import { freeResources, paidResources } from '@/data/resources';
 import { getResources, getLectures } from '@/lib/notion';
-import Link from 'next/link';
 
 export const revalidate = 60;
 
@@ -54,24 +53,6 @@ export default async function HomePage() {
         cards={lectureCards}
         dark={false}
       />
-
-      <section className="bg-canvas">
-        <div className="max-w-[1200px] mx-auto px-6 py-20 text-center">
-          <p className="text-[14px] font-semibold text-primary mb-3 tracking-wide">무료특강</p>
-          <h2 className="text-[40px] font-semibold tracking-tight text-ink mb-4">
-            소소숲을,<br />먼저 만나보세요.
-          </h2>
-          <p className="text-[17px] text-ink-muted leading-[1.47] mb-8 max-w-[480px] mx-auto">
-            정규 강의 오픈에 앞서 진행하는 무료특강입니다.<br />신청하고 소소숲 콘텐츠를 경험해보세요.
-          </p>
-          <Link
-            href="/free-lecture"
-            className="inline-flex items-center px-8 py-4 rounded-full bg-primary text-white text-[17px] hover:bg-primary-dark transition-colors active:scale-95"
-          >
-            무료특강 신청하기
-          </Link>
-        </div>
-      </section>
     </>
   );
 }

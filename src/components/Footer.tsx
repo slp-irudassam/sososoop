@@ -21,7 +21,7 @@ export default function Footer() {
               { label: '소소숲 소개', href: '/about' },
               { label: '자료실', href: '/resources' },
               { label: '강의', href: '/lectures' },
-              { label: '무료특강 신청', href: '/free-lecture' },
+              { label: '한글놀이', href: '/hangul' },
             ].map((link) => (
               <Link
                 key={link.href}
