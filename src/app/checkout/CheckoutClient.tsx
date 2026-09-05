@@ -13,7 +13,9 @@ type Order = {
   query: string; // successUrl/failUrl에 붙일 주문 식별 쿼리 (product=.. 또는 items=..)
 };
 
-type MethodKey = 'CARD' | 'TRANSFER' | 'VIRTUAL_ACCOUNT' | 'MOBILE_PHONE';
+// 토스에서 활성화한 결제수단만 노출한다(카드·간편결제 / 계좌이체).
+// 미신청 수단(가상계좌·휴대폰)은 고르면 토스 창에서 에러가 나므로 숨김.
+type MethodKey = 'CARD' | 'TRANSFER';
 
 const METHODS: { key: MethodKey; label: string; desc: string }[] = [
   {
@@ -22,12 +24,6 @@ const METHODS: { key: MethodKey; label: string; desc: string }[] = [
     desc: '신용·체크카드, 카카오페이·네이버페이·토스페이 등',
   },
   { key: 'TRANSFER', label: '계좌이체', desc: '은행 계좌에서 바로 이체' },
-  {
-    key: 'VIRTUAL_ACCOUNT',
-    label: '가상계좌 (무통장입금)',
-    desc: '발급된 계좌로 입금하면 이용이 시작돼요',
-  },
-  { key: 'MOBILE_PHONE', label: '휴대폰 결제', desc: '통신요금과 함께 청구' },
 ];
 
 export default function CheckoutClient({ order }: { order: Order }) {
@@ -65,13 +61,9 @@ export default function CheckoutClient({ order }: { order: Order }) {
             useAppCardOnly: false,
           },
         });
-      } else if (selected === 'TRANSFER') {
+      } else {
         // 계좌이체는 현재 페이지를 결제창으로 이동(self) — iframe 갇힘/타임아웃 후 닫기불가 방지
         await payment.requestPayment({ ...base, method: 'TRANSFER', windowTarget: 'self' });
-      } else if (selected === 'VIRTUAL_ACCOUNT') {
-        await payment.requestPayment({ ...base, method: 'VIRTUAL_ACCOUNT', windowTarget: 'self' });
-      } else {
-        await payment.requestPayment({ ...base, method: 'MOBILE_PHONE', windowTarget: 'self' });
       }
     } catch (e: unknown) {
       // 사용자가 결제창을 닫은 경우 등

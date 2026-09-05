@@ -1,8 +1,11 @@
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { resolveOrder } from '@/lib/products';
+import { createClient } from '@/lib/supabase/server';
 import CheckoutClient from './CheckoutClient';
 
-export const revalidate = 60;
+// 로그인 세션을 매 요청 확인해야 하므로 정적 캐시하지 않는다.
+export const dynamic = 'force-dynamic';
 
 export default async function CheckoutPage({
   searchParams,
@@ -10,6 +13,18 @@ export default async function CheckoutPage({
   searchParams: Promise<{ product?: string; items?: string }>;
 }) {
   const { product, items } = await searchParams;
+
+  // 구매 내역을 소소숲 계정과 묶어야 결제 후 자동 접근이 되므로, 결제 전 로그인 필수.
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    const back = product
+      ? `/checkout?product=${encodeURIComponent(product)}`
+      : `/checkout?items=${encodeURIComponent(items ?? '')}`;
+    redirect(`/login?next=${encodeURIComponent(back)}`);
+  }
 
   // 단일 상품(구매하기) 또는 장바구니(items=id1,id2) 주문을 해석한다.
   const ids = product ? [product] : (items ?? '').split(',').filter(Boolean);

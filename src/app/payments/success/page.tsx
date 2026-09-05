@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { resolveOrder } from '@/lib/products';
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 
 export const dynamic = 'force-dynamic';
 
@@ -67,18 +68,27 @@ export default async function PaymentSuccessPage({
     | { accountNumber?: string; bank?: string; bankCode?: string; dueDate?: string }
     | undefined;
 
-  // 3) 주문 기록 (best-effort — 테이블/권한 없으면 조용히 건너뜀)
+  // 3) 주문 기록 — 로그인 유저와 묶어 service_role로 저장(결제 후 자동 접근의 근거).
+  //    세션으로 유저를 파악하고, 삽입은 RLS를 우회하는 admin 클라이언트로 한다
+  //    (공개 anon 키로의 가짜 결제 위조 삽입을 막기 위해 orders 테이블엔 클라이언트 정책이 없음).
   if (result.ok && order) {
     try {
       const supabase = await createClient();
-      await supabase.from('orders').insert({
-        order_id: orderId,
-        payment_key: paymentKey,
-        product_slug: order.items.map((it) => it.id).join(','),
-        order_name: order.orderName,
-        amount,
-        status,
-      });
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      const admin = createAdminClient();
+      if (admin) {
+        await admin.from('orders').insert({
+          order_id: orderId,
+          payment_key: paymentKey,
+          user_id: user?.id ?? null,
+          product_slug: order.items.map((it) => it.id).join(','),
+          order_name: order.orderName,
+          amount,
+          status,
+        });
+      }
     } catch {
       // no-op
     }
