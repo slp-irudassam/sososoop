@@ -12,6 +12,7 @@ const navLinks = [
   { label: '자료실', href: '/resources' },
   { label: '강의', href: '/lectures' },
   { label: '한글놀이', href: '/hangul' },
+  { label: 'CBT 연습', href: '/slp-cbt-practice' },
   { label: '고객센터', href: 'http://pf.kakao.com/_gngTX', external: true },
 ];
 
