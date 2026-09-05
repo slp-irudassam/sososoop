@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { resolveOrder } from '@/lib/products';
+import { resolveOrder, getPurchasable } from '@/lib/products';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 
@@ -47,6 +47,10 @@ export default async function PaymentSuccessPage({
   const productParam = one(sp.product);
   const ids = productParam ? [productParam] : one(sp.items).split(',').filter(Boolean);
   const order = await resolveOrder(ids);
+
+  // 주문에 CBT 이용권이 포함됐으면 결제완료 화면에서 바로 앱으로 갈 버튼을 띄운다.
+  const cbt = await getPurchasable('cbt');
+  const hasCbt = !!order && !!cbt && order.items.some((it) => it.id === cbt.id);
 
   // 1) 금액 위변조 검증 — 서버가 계산한 총액과 반드시 일치해야 승인 진행
   let result: Awaited<ReturnType<typeof confirmPayment>> | { ok: false; message: string };
@@ -187,12 +191,26 @@ export default async function PaymentSuccessPage({
           </div>
         </div>
 
-        <Link
-          href="/resources"
-          className="inline-block px-6 py-3 rounded-full bg-primary text-white text-[14px] font-medium"
-        >
-          자료실로 돌아가기
-        </Link>
+        {hasCbt ? (
+          <div className="flex flex-col items-center gap-3">
+            <Link
+              href="/slp-cbt-practice"
+              className="inline-block w-full px-6 py-3.5 rounded-full bg-primary text-white text-[15px] font-semibold hover:bg-primary-dark transition-colors"
+            >
+              CBT 연습앱 시작하기 →
+            </Link>
+            <Link href="/resources" className="text-[13px] text-ink-muted underline">
+              자료실로 돌아가기
+            </Link>
+          </div>
+        ) : (
+          <Link
+            href="/resources"
+            className="inline-block px-6 py-3 rounded-full bg-primary text-white text-[14px] font-medium"
+          >
+            자료실로 돌아가기
+          </Link>
+        )}
       </div>
     </main>
   );
