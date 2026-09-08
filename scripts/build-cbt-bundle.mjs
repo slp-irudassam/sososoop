@@ -10,6 +10,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import vm from 'node:vm';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -18,7 +19,21 @@ const SRC_DIR =
 const OUT = join(__dirname, '..', 'src', 'app', 'slp-cbt-practice', 'app-html.json');
 
 let html = readFileSync(join(SRC_DIR, 'index.html'), 'utf8');
-const questions = readFileSync(join(SRC_DIR, 'questions.js'), 'utf8');
+const questionsSrc = readFileSync(join(SRC_DIR, 'questions.js'), 'utf8');
+
+// questions.js를 평가해 HIDDEN_SETS(비공개 급수/회차)를 번들에서 **아예 제외**한다.
+// 화면에서만 숨기면 HTML 소스에 문항이 남아 유출되므로, 서빙 데이터 자체에서 뺀다.
+const sandbox = { window: {} };
+vm.runInNewContext(questionsSrc, sandbox);
+const W = sandbox.window;
+const hidden = W.HIDDEN_SETS || [];
+const isHidden = (q) => hidden.some((h) => h.grade === (q.grade || 1) && h.set === (q.set || 1));
+const visible = (W.QUESTIONS || []).filter((q) => !isHidden(q));
+const stripped = (W.QUESTIONS || []).length - visible.length;
+const questions =
+  `window.EXAM_TITLE = ${JSON.stringify(W.EXAM_TITLE || '언어재활사 모의 CBT')};\n` +
+  `window.HIDDEN_SETS = [];\n` + // 번들엔 숨김 세트가 없으므로 비움
+  `window.QUESTIONS = ${JSON.stringify(visible)};`;
 
 // 1) Firebase 관련 <script> 4줄 제거(로그인프리 모드로 전환)
 html = html
@@ -41,3 +56,4 @@ if (/firebase-config\.js|firebasejs\//.test(html)) {
 
 writeFileSync(OUT, JSON.stringify(html), 'utf8');
 console.log(`OK  ${OUT}  (${(html.length / 1024).toFixed(0)} KB HTML)`);
+console.log(`문항: 공개 ${visible.length}개 / 비공개 제외 ${stripped}개 (HIDDEN_SETS=${JSON.stringify(hidden)})`);
