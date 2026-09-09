@@ -50,9 +50,14 @@ export default function Footer() {
             <p className="text-[10px] text-ink-light">
               © 2026 소소숲:지혜의 기록소. All rights reserved.
             </p>
-            <p className="text-[10px] text-ink-light mt-1">
-              사업자등록번호: 203-33-40593
-            </p>
+            <div className="text-[10px] text-ink-light mt-2 leading-relaxed space-y-0.5">
+              <p>상호명: 소소숲 · 대표자: 이승윤 · 사업자등록번호: 203-33-40593</p>
+              <p>사업장 주소: 서울특별시 강남구 개포로 264, 126-2503</p>
+              <p>
+                전화: <a href="tel:010-5668-8046" className="hover:text-ink transition-colors">010-5668-8046</a>
+                {' '}· 문의: 카카오채널 @소소숲
+              </p>
+            </div>
           </div>
           <div className="flex gap-4">
             <Link href="/privacy" className="text-[10px] text-ink-light hover:text-ink transition-colors">
