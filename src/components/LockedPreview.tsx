@@ -109,19 +109,26 @@ export default function LockedPreview({
             ))}
           </div>
 
-          {/* 큰 이미지 + 잠김 표시 */}
-          <div className="relative rounded-[18px] overflow-hidden border border-hairline bg-canvas">
-            <img
-              src={shot.src}
-              alt={`${title} ${shot.label} 화면`}
-              className="block w-full"
-              loading="lazy"
-            />
+          {/* 큰 이미지 + 잠김 표시.
+              좁은 화면에서 축소하면 글씨가 안 보이므로, 이미지는 최소 너비를 유지하고
+              페이지 대신 이 상자만 가로로 밀리게 한다. */}
+          <div className="relative rounded-[18px] border border-hairline bg-canvas">
+            <div className="overflow-x-auto rounded-[18px]">
+              <img
+                src={shot.src}
+                alt={`${title} ${shot.label} 화면`}
+                className="block w-full min-w-[680px] sm:min-w-0"
+                loading="lazy"
+              />
+            </div>
             <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-ink/80 text-on-dark text-[12px] font-semibold backdrop-blur-sm">
               🔒 이용권 필요
             </span>
           </div>
-          <p className="mt-3 text-[14px] text-ink-muted leading-relaxed">{shot.caption}</p>
+          <p className="mt-3 text-[14px] text-ink-muted leading-relaxed">
+            <span className="sm:hidden text-ink-light">← 옆으로 밀어서 볼 수 있어요 · </span>
+            {shot.caption}
+          </p>
         </div>
       </section>
 
