@@ -1,16 +1,78 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { hasCbtEntitlement } from '@/lib/entitlements';
+import LockedPreview, { type PreviewFeature, type PreviewShot } from '@/components/LockedPreview';
 import DeviceGate from './DeviceGate';
 
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: '언어재활사 CBT 연습',
-  description: '언어재활사 국가시험 대비 CBT 모의 연습앱',
+  description:
+    '언어재활사 국가시험 CBT 형식을 그대로 재현한 온라인 모의 연습앱. 실제와 동일한 교시 구성·제한시간으로 풀고, 문항마다 해설을 확인합니다.',
 };
+
+const SHOTS: PreviewShot[] = [
+  {
+    src: '/images/preview/cbt-start.webp',
+    label: '응시 정보 입력',
+    caption:
+      '실제 CBT처럼 급수와 교시를 고르고 입장합니다. 1·2교시 이어풀기까지 실제 시험과 같은 구성이에요.',
+  },
+  {
+    src: '/images/preview/cbt-exam.webp',
+    label: '시험 화면',
+    caption:
+      '계산기·그림판·형광펜·메모·체크문제까지 실제 CBT 도구를 그대로 재현했습니다. 글자 크기와 화면 배치도 시험장과 같은 방식으로 조절해요.',
+  },
+  {
+    src: '/images/preview/cbt-result.webp',
+    label: '결과·해설',
+    caption:
+      '과목별 정답률과 과락 여부를 바로 확인하고, 틀린 문제만 모아 해설을 봅니다. 오답풀이·전체 해설은 PDF로도 저장돼요.',
+  },
+];
+
+const FEATURES: PreviewFeature[] = [
+  {
+    emoji: '🖥️',
+    title: '실제 CBT 화면 그대로',
+    desc: '계산기·그림판·형광펜·메모·체크문제 등 시험장에서 쓰는 도구를 똑같이 재현했습니다. 시험 당일 화면이 낯설지 않아요.',
+  },
+  {
+    emoji: '⏱️',
+    title: '실제와 같은 교시·시간',
+    desc: '교시 구성과 제한시간이 실제 필기시험과 동일합니다. 1교시를 마치면 이어서 2교시로 넘어갈 수 있어요.',
+  },
+  {
+    emoji: '📊',
+    title: '과목별 채점과 과락 판정',
+    desc: '총점 60%·과목별 40% 실제 합격 기준으로 채점해, 어느 과목이 위험한지 바로 보여줍니다.',
+  },
+  {
+    emoji: '📝',
+    title: '문항마다 상세 해설',
+    desc: '틀린 문제만 모아 보거나 전체 해설을 볼 수 있고, 오답풀이를 PDF로 저장해 따로 공부할 수 있어요.',
+  },
+  {
+    emoji: '📚',
+    title: '1급·2급 연습 문항',
+    desc: '실제 시험의 과목 구성·문항 유형을 따른 창작 연습 문항으로, 문항은 계속 추가·업데이트됩니다.',
+  },
+  {
+    emoji: '♾️',
+    title: '기간 제한 없이',
+    desc: '한 번 구매하면 기간 제한 없이 반복해서 응시할 수 있습니다. 추가 결제가 없어요.',
+  },
+];
+
+const NOTES = [
+  '이용권을 구매한 소소숲 회원만 이용할 수 있습니다.',
+  '한 번 구매하면 기간 제한 없이 계속 이용할 수 있고, 문항도 계속 추가됩니다.',
+  '개인 학습용이라 계정당 사용 기기가 제한됩니다. 기기를 바꾸면 고객센터로 문의해 주세요.',
+  '실제 기출문제가 아닌 창작 연습 문항으로 구성되어 있습니다.',
+  '본 서비스는 한국보건의료인국가시험원(국시원)과 무관한 개인 학습용 연습 도구입니다.',
+];
 
 export default async function CbtPracticePage() {
   const supabase = await createClient();
@@ -18,37 +80,30 @@ export default async function CbtPracticePage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // 1) 로그인 필수
-  if (!user) redirect('/login?next=/slp-cbt-practice');
-
-  // 2) 결제(이용권) 필수 — 미결제면 구매 안내
-  const entitled = await hasCbtEntitlement(user.id);
+  // 비로그인 / 미결제 → 로그인 폼 대신 소개 + 미리보기 화면을 보여준다.
+  // (앱 HTML을 내려주는 /slp-cbt-practice/app 라우트가 실제 게이트를 다시 확인한다)
+  const entitled = user ? await hasCbtEntitlement(user.id) : false;
   if (!entitled) {
     return (
-      <main className="min-h-[70vh] flex items-center justify-center px-5 py-12">
-        <div className="w-full max-w-[440px] bg-pearl border border-hairline rounded-[18px] p-8 text-center">
-          <h1 className="text-[20px] font-bold text-ink mb-2">언어재활사 CBT 연습</h1>
-          <p className="text-[14px] text-ink-muted leading-relaxed mb-6">
-            이 연습앱은 이용권을 구매한 회원만 이용할 수 있어요.
-            <br />
-            구매 후 이 페이지에서 바로 시작할 수 있습니다.
-          </p>
-          <Link
-            href="/checkout?product=cbt"
-            className="inline-block px-6 py-3 rounded-full bg-primary text-white text-[15px] font-semibold hover:bg-primary-dark transition-colors"
-          >
-            이용권 구매하기
-          </Link>
-          <div className="mt-4">
-            <Link href="/resources" className="text-[13px] text-ink-muted underline">
-              자료실 둘러보기
-            </Link>
-          </div>
-        </div>
-      </main>
+      <LockedPreview
+        state={user ? 'unpaid' : 'anonymous'}
+        eyebrow="국가시험 대비"
+        title="언어재활사 CBT 연습"
+        tagline="실제 시험과 동일한 교시 구성·제한시간·화면으로 연습하고, 문항마다 상세한 해설로 복습하는 온라인 모의 CBT입니다."
+        intro={
+          user
+            ? '실제 화면입니다. 이용권을 구매하면 아래 화면을 그대로 사용할 수 있어요.'
+            : '실제 화면입니다. 구매 후 로그인하면 아래 화면을 그대로 사용할 수 있어요.'
+        }
+        shots={SHOTS}
+        features={FEATURES}
+        notes={NOTES}
+        checkoutHref="/checkout?product=cbt"
+        loginHref="/login?next=/slp-cbt-practice"
+      />
     );
   }
 
-  // 3) 결제 확인됨 — 기기 바인딩 후 앱 표시
+  // 결제 확인됨 — 기기 바인딩 후 앱 표시
   return <DeviceGate />;
 }

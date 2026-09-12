@@ -14,8 +14,21 @@ export type Purchasable = {
   kind: 'resource' | 'lecture';
 };
 
-// 기존 토스 심사 URL(/checkout?product=cbt)을 계속 살려두기 위한 별칭.
+// 상품 id 대신 쓰는 고정 별칭 → Notion 상품 제목.
+// (/checkout?product=cbt 같은 URL을 Notion 페이지 UUID와 무관하게 유지하기 위함)
 const CBT_TITLE = '언어재활사 CBT 연습앱 이용권';
+const HANGUL_TITLE = '한글놀이 이용권';
+const ALIAS_TITLES: Record<string, string> = {
+  cbt: CBT_TITLE,
+  hangul: HANGUL_TITLE,
+};
+
+// 별칭이면 유료 자료 목록에서 같은 제목의 상품 id로 바꿔준다.
+function resolveAlias(rawId: string, paid: Resource[]): string {
+  const title = ALIAS_TITLES[rawId];
+  if (!title) return rawId;
+  return paid.find((r) => r.title === title)?.id ?? rawId;
+}
 
 async function loadResources(): Promise<Resource[]> {
   return (await getResources()) ?? [...freeResources, ...paidResources];
@@ -50,11 +63,7 @@ export async function getPurchasable(
   const [resources, lects] = await Promise.all([loadResources(), loadLectures()]);
   const paid = resources.filter((r) => r.type === 'paid');
 
-  let id = rawId;
-  if (rawId === 'cbt') {
-    const cbt = paid.find((r) => r.title === CBT_TITLE);
-    if (cbt) id = cbt.id;
-  }
+  const id = resolveAlias(rawId, paid);
 
   return pickResource(paid, id) ?? pickLecture(lects, id);
 }
@@ -72,11 +81,10 @@ export async function resolveOrder(rawIds: string[]): Promise<Order | null> {
 
   const [resources, lects] = await Promise.all([loadResources(), loadLectures()]);
   const paid = resources.filter((r) => r.type === 'paid');
-  const cbt = paid.find((r) => r.title === CBT_TITLE);
 
   const items: Purchasable[] = [];
   for (const rawId of ids) {
-    const id = rawId === 'cbt' && cbt ? cbt.id : rawId;
+    const id = resolveAlias(rawId, paid);
     if (items.some((it) => it.id === id)) continue; // 별칭 등으로 인한 중복 제거
     const found = pickResource(paid, id) ?? pickLecture(lects, id);
     if (found) items.push(found);

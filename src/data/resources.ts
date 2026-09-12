@@ -132,8 +132,24 @@ export const paidResources: Resource[] = [
     category: "학습",
     fileType: "웹앱",
     type: "paid",
-    price: 7900,
+    price: 14900,
     image: "/images/resource-cbt-practice.png",
+    notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
+    accountInfo: {
+      bank: "토스뱅크",
+      number: "1000-1285-0842",
+      holder: "이승윤",
+    },
+  },
+  {
+    id: "hangul-play-pass",
+    title: "한글놀이 이용권",
+    description:
+      "난독·읽기부진 아동을 위한 한글 블렌딩 학습 도구 이용권입니다. 아동이 배운 초성·중성·종성만 켜두면 블렌딩 보드·읽기 게임·학습자료 만들기가 모두 그 범위 안에서 돌아갑니다. 아동별 프로필로 진도를 따로 관리하고, 의미 단어·무의미 단어·문장을 자동 생성해 바로 인쇄하거나 글씨연습장으로 이어서 만들 수 있어요. 한 번 구매하면 기간 제한 없이 계속 이용할 수 있으며, 기능도 지속적으로 추가·업데이트됩니다.",
+    category: "학습",
+    fileType: "웹앱",
+    type: "paid",
+    price: 7900,
     notionFormUrl: "https://sunrise-wisteria-5ca.notion.site/ca565ef8fa6b4b81b3f6be3978a2e84a",
     accountInfo: {
       bank: "토스뱅크",
