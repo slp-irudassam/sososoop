@@ -14,7 +14,6 @@ export type PreviewShot = {
 };
 
 export type PreviewFeature = {
-  emoji: string;
   title: string;
   desc: string;
 };
@@ -142,9 +141,6 @@ export default function LockedPreview({
                 key={f.title}
                 className="bg-pearl rounded-[18px] border border-hairline p-6"
               >
-                <span className="block text-[22px] mb-3" aria-hidden>
-                  {f.emoji}
-                </span>
                 <h3 className="text-[16px] font-semibold text-ink mb-2">{f.title}</h3>
                 <p className="text-[14px] text-ink-muted leading-relaxed">{f.desc}</p>
               </div>
