@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { isAdmin } from '@/lib/admin';
 import { hasCbtEntitlement } from '@/lib/entitlements';
 import appHtml from '../app-html.json';
 
@@ -21,22 +22,27 @@ export async function GET(request: Request) {
     return NextResponse.redirect(url);
   }
 
+  // 관리자 계정은 이용권·기기 제한 없이 통과.
+  const adminUser = isAdmin(user);
+
   // 결제 확인
-  const entitled = await hasCbtEntitlement(user.id);
+  const entitled = adminUser || (await hasCbtEntitlement(user.id));
   if (!entitled) return NextResponse.redirect(new URL('/slp-cbt-practice', request.url));
 
   // 기기 확인 — 바인딩 쿠키가 DB에 등록된 기기와 일치해야 함(직접 접근 시 게이트로 회귀)
-  const cookieStore = await cookies();
-  const devCookie = cookieStore.get('slp_cbt_dev')?.value;
-  const admin = createAdminClient();
-  if (!admin) return NextResponse.redirect(new URL('/slp-cbt-practice', request.url));
-  const { data: access } = await admin
-    .from('cbt_access')
-    .select('device_id')
-    .eq('user_id', user.id)
-    .maybeSingle();
-  if (!devCookie || !access || access.device_id !== devCookie) {
-    return NextResponse.redirect(new URL('/slp-cbt-practice', request.url));
+  if (!adminUser) {
+    const cookieStore = await cookies();
+    const devCookie = cookieStore.get('slp_cbt_dev')?.value;
+    const admin = createAdminClient();
+    if (!admin) return NextResponse.redirect(new URL('/slp-cbt-practice', request.url));
+    const { data: access } = await admin
+      .from('cbt_access')
+      .select('device_id')
+      .eq('user_id', user.id)
+      .maybeSingle();
+    if (!devCookie || !access || access.device_id !== devCookie) {
+      return NextResponse.redirect(new URL('/slp-cbt-practice', request.url));
+    }
   }
 
   return new NextResponse(appHtml as string, {

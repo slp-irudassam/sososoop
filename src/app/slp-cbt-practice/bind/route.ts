@@ -4,6 +4,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { isAdmin } from '@/lib/admin';
 import { hasCbtEntitlement } from '@/lib/entitlements';
 
 export const dynamic = 'force-dynamic';
@@ -14,6 +15,9 @@ export async function POST(request: Request) {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ ok: false, reason: 'auth' }, { status: 401 });
+
+  // 관리자 계정은 기기를 등록하지 않는다 → 여러 기기에서 제한 없이 확인 가능.
+  if (isAdmin(user)) return NextResponse.json({ ok: true });
 
   const entitled = await hasCbtEntitlement(user.id);
   if (!entitled) return NextResponse.json({ ok: false, reason: 'unpaid' }, { status: 403 });

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { createClient } from '@/lib/supabase/server';
+import { isAdmin } from '@/lib/admin';
 import { hasHangulEntitlement } from '@/lib/entitlements';
 import LockedPreview, { type PreviewFeature, type PreviewShot } from '@/components/LockedPreview';
 
@@ -81,7 +82,8 @@ export default async function HangulPage() {
 
   // 비로그인 / 미결제 → 로그인 폼 대신 소개 + 미리보기 화면을 보여준다.
   // (앱 HTML을 내려주는 /hangul/app 라우트가 실제 게이트를 다시 확인한다)
-  const entitled = user ? await hasHangulEntitlement(user.id) : false;
+  // 관리자 계정은 이용권 없이 통과.
+  const entitled = user ? isAdmin(user) || (await hasHangulEntitlement(user.id)) : false;
   if (!entitled) {
     return (
       <LockedPreview

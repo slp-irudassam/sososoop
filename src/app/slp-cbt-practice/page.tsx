@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { createClient } from '@/lib/supabase/server';
+import { isAdmin } from '@/lib/admin';
 import { hasCbtEntitlement } from '@/lib/entitlements';
 import LockedPreview, { type PreviewFeature, type PreviewShot } from '@/components/LockedPreview';
 import DeviceGate from './DeviceGate';
@@ -76,7 +77,8 @@ export default async function CbtPracticePage() {
 
   // 비로그인 / 미결제 → 로그인 폼 대신 소개 + 미리보기 화면을 보여준다.
   // (앱 HTML을 내려주는 /slp-cbt-practice/app 라우트가 실제 게이트를 다시 확인한다)
-  const entitled = user ? await hasCbtEntitlement(user.id) : false;
+  // 관리자 계정은 이용권 없이 통과(기기 제한도 bind·app 라우트에서 건너뜀).
+  const entitled = user ? isAdmin(user) || (await hasCbtEntitlement(user.id)) : false;
   if (!entitled) {
     return (
       <LockedPreview
