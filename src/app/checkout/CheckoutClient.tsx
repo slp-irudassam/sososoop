@@ -96,6 +96,10 @@ export default function CheckoutClient({ order }: { order: Order }) {
               </span>
             </div>
           ))}
+          <div className="flex items-center justify-between border-t border-hairline pt-2.5 mt-1">
+            <span className="text-[13px] text-ink-muted">이용기간</span>
+            <span className="text-[13px] text-ink">결제일로부터 12개월</span>
+          </div>
           <div className="flex items-baseline justify-between border-t border-hairline pt-3 mt-2">
             <span className="text-[13px] text-ink-muted">
               총 결제금액 ({order.lines.length}개)
@@ -149,7 +153,10 @@ export default function CheckoutClient({ order }: { order: Order }) {
         </button>
 
         <p className="text-[11.5px] text-ink-light leading-relaxed mt-4 text-center">
-          토스페이먼츠 안전결제
+          결제하기를 누르면 주문 내용과{' '}
+          <Link href="/terms" target="_blank" className="underline">이용약관</Link>·
+          <Link href="/refund" target="_blank" className="underline">환불정책</Link>을 확인하고
+          결제에 동의한 것으로 봅니다. · 토스페이먼츠 안전결제
         </p>
         <Link
           href="/cart"

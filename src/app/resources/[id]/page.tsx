@@ -130,7 +130,7 @@ export default async function ResourceDetailPage({
 
               <p className="text-[12px] text-ink-light text-center mt-3 leading-relaxed">
                 {isPaid
-                  ? '토스페이먼츠 안전결제 · 카드 · 간편결제 · 계좌이체 · 가상계좌'
+                  ? '이용기간: 결제일로부터 12개월 · 토스페이먼츠 안전결제'
                   : '로그인 없이 바로 이용할 수 있어요.'}
               </p>
             </div>
@@ -161,7 +161,11 @@ export default async function ResourceDetailPage({
                   </li>
                   <li className="flex items-start gap-2.5">
                     <span className="text-primary mt-0.5">✓</span>
-                    카드·간편결제·계좌이체·가상계좌로 결제할 수 있어요 (토스페이먼츠).
+                    이용기간은 결제일로부터 12개월입니다.
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-primary mt-0.5">✓</span>
+                    카드·간편결제·계좌이체로 결제할 수 있어요 (토스페이먼츠).
                   </li>
                   <li className="flex items-start gap-2.5">
                     <span className="text-primary mt-0.5">✓</span>

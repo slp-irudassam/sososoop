@@ -276,7 +276,7 @@ export default async function LectureDetailPage({
             price={lecture.price}
             image={lecture.image}
             badge="모집중"
-            note="토스페이먼츠 안전결제 · 카드 · 간편결제 · 계좌이체 · 가상계좌"
+            note="수강기간(녹화본·자료 이용): 결제일로부터 12개월 · 토스페이먼츠 안전결제"
           />
         </div>
       </section>

@@ -60,6 +60,9 @@ export default function Footer() {
             </div>
           </div>
           <div className="flex gap-4">
+            <Link href="/terms" className="text-[10px] text-ink-light hover:text-ink transition-colors">
+              이용약관
+            </Link>
             <Link href="/privacy" className="text-[10px] text-ink-light hover:text-ink transition-colors">
               개인정보처리방침
             </Link>
