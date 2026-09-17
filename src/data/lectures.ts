@@ -20,7 +20,7 @@ export const lectures: Lecture[] = [
     title: "AI로 나만의 책 출판하기",
     description:
       "AI를 활용해 전자책과 종이책을 직접 출판하는 전 과정을 담았습니다. 기획부터 원고 작성, 디자인, 유통까지 한 번에.",
-    price: 200000,
+    price: 300000,
     duration: "5시간",
     category: "출판",
     image: "/images/lecture-book-publishing.png",
@@ -52,7 +52,7 @@ export const lectures: Lecture[] = [
     title: "평가보고서 작성 효율화 with AI",
     description:
       "AI로 평가보고서 초안을 빠르게 잡고, 전문성 있게 다듬는 실전 강의. KOLRA, P-FA 등 주요 검사 보고서 예시 포함.",
-    price: 39000,
+    price: 55000,
     duration: "2시간",
     category: "보고서 작성",
     image: "/images/lecture-report-writing2.png",
