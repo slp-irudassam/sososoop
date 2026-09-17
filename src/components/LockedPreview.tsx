@@ -180,7 +180,7 @@ export default function LockedPreview({
             >
               이용권 구매하기
             </Link>
-            <p className="mt-3 text-[12px] text-ink-light">이용기간: 결제일로부터 12개월</p>
+            <p className="mt-3 text-[12px] text-ink-light">이용기간: 결제일로부터 6개월</p>
             <Link
               href="/resources"
               className="inline-block mt-4 text-[13px] text-ink-muted underline hover:text-primary transition-colors"

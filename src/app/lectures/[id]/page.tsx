@@ -6,7 +6,7 @@ import { getLectures } from '@/lib/notion';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import PurchaseBox from '@/components/PurchaseBox';
-import { servicePeriodLabel } from '@/lib/period';
+import { SERVICE_PERIOD_LABEL } from '@/lib/period';
 
 export const revalidate = 60;
 
@@ -277,7 +277,7 @@ export default async function LectureDetailPage({
             price={lecture.price}
             image={lecture.image}
             badge="모집중"
-            note={`수강기간(녹화본·자료 이용): ${servicePeriodLabel(lecture.title)} · 토스페이먼츠 안전결제`}
+            note={`수강기간(녹화본·자료 이용): ${SERVICE_PERIOD_LABEL} · 토스페이먼츠 안전결제`}
           />
         </div>
       </section>

@@ -16,7 +16,7 @@ export default function PurchaseBox({
   price,
   image,
   badge = '모집중',
-  note = '이용기간: 결제일로부터 12개월 · 토스페이먼츠 안전결제',
+  note = '이용기간: 결제일로부터 6개월 · 토스페이먼츠 안전결제',
 }: Props) {
   return (
     <aside id="apply" className="lg:sticky lg:top-24 flex flex-col gap-6 scroll-mt-24">
