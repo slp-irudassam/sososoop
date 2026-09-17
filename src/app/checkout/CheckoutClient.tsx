@@ -9,7 +9,7 @@ const CLIENT_KEY = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY;
 type Order = {
   orderName: string;
   amount: number;
-  lines: { title: string; amount: number }[];
+  lines: { title: string; amount: number; period: string }[];
   query: string; // successUrl/failUrl에 붙일 주문 식별 쿼리 (product=.. 또는 items=..)
 };
 
@@ -90,16 +90,15 @@ export default function CheckoutClient({ order }: { order: Order }) {
                 i > 0 ? 'border-t border-hairline pt-2.5 mt-1' : ''
               }`}
             >
-              <span className="text-[14.5px] text-ink leading-snug">{line.title}</span>
+              <span className="text-[14.5px] text-ink leading-snug">
+                {line.title}
+                <span className="block text-[12px] text-ink-muted mt-0.5">이용기간: {line.period}</span>
+              </span>
               <span className="text-[14.5px] text-ink font-medium whitespace-nowrap">
                 {line.amount.toLocaleString()}원
               </span>
             </div>
           ))}
-          <div className="flex items-center justify-between border-t border-hairline pt-2.5 mt-1">
-            <span className="text-[13px] text-ink-muted">이용기간</span>
-            <span className="text-[13px] text-ink">결제일로부터 12개월</span>
-          </div>
           <div className="flex items-baseline justify-between border-t border-hairline pt-3 mt-2">
             <span className="text-[13px] text-ink-muted">
               총 결제금액 ({order.lines.length}개)
