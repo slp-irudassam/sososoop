@@ -6,13 +6,7 @@ export default function Footer() {
       <div className="max-w-[1200px] mx-auto px-6 py-16">
         <div className="flex flex-col md:flex-row justify-between gap-8">
           <div>
-            <p className="text-[14px] font-semibold text-ink mb-3">소소숲:지혜의 기록소</p>
-            <p className="text-[12px] text-ink-muted leading-relaxed">
-              대표: 이루다쌤 (이승윤) · 언어재활사 · AI 활용 강사
-            </p>
-            <p className="text-[12px] text-ink-muted">
-              문의: 카카오채널 @소소숲
-            </p>
+            <p className="text-[14px] font-semibold text-ink">소소숲:지혜의 기록소</p>
           </div>
 
           <div className="flex flex-col gap-2">
